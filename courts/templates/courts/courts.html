@@ -1,0 +1,30 @@
+{% extends 'sports/base.html' %}
+{% block content %}
+{% for staff in staffs %}
+    {% if user == staff.user %}
+        <a
+            class="btn btn-outline-info btn-sm mt-1 mb-3 mx-1"
+            href="{% url 'slots-create' %}"
+            >Add New Slot</a
+        >
+    {% endif %}
+{% endfor %}
+{% if user.is_superuser %}
+    <a
+            class="btn btn-outline-info btn-sm mt-1 mb-3 mx-1"
+            href="{% url 'courts-create' %}"
+            >Add New Court</a
+    >
+{% endif %}
+{% for court in courts %}
+    <article class="media content-section">
+        <div class="media-body">
+            <div class="article-metadata">
+                <h2><a class="article-title" href="{% url 'courts-detail' court.id %}">{{ court.name }}</h2>
+            </div>
+            <p class="article-content">{{ court.capacity }}</p>
+        </div>
+    </article>
+{% endfor %}
+
+{% endblock content %}

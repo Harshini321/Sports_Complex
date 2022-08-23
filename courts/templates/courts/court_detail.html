@@ -1,0 +1,26 @@
+{% extends 'sports/base.html' %}
+{% block content %}
+    <article class="media content-section">
+        <div class="media-body">
+        <div class="article-metadata">
+            <h2 class="article-title">{{court.name}}</h2>
+        </div>
+        {% if user.email|slice:5 == 'staff' or user.is_superuser%}
+            <div>
+              <a
+                class="btn btn-outline-info btn-sm mt-1 mb-1"
+                href="{% url 'courts-update' court.id %}"
+                >Update</a
+              >
+              <a
+                class="btn btn-danger btn-sm mt-1 mb-1 delete"
+                href="{% url 'courts-delete' court.id %}"
+                >Delete</a
+              >
+            </div>
+        {% endif %}
+        <p class="article-content">{{ court.capacity }}</p>
+
+        </div>
+    </article>
+{% endblock content %}

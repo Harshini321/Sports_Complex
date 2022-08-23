@@ -1,0 +1,39 @@
+{% extends 'sports/base.html' %}
+{% block content %}
+{% for staff in staffs %}
+    {% if user == staff.user %}
+        <a
+            class="btn btn-outline-info btn-sm mt-1 mb-3 mx-1"
+            href="{% url 'slots-create' %}"
+            >Add New Slot</a
+        >
+    {% endif %}
+{% endfor %}
+{% if user.is_superuser %}
+    <a
+            class="btn btn-outline-info btn-sm mt-1 mb-3 mx-1"
+            href="{% url 'slots-create' %}"
+            >Add New Slot</a
+    >
+{% endif %}
+{% for slot in slots %}
+    <article class="media content-section">
+        <div class="media-body">
+        <div class="article-metadata">
+            <h2><a class="article-title" href="{% url 'slots-detail' slot.id %}">Slot : {{slot.id}}</h2>
+        </div>
+        <h5>Available courts</h5>
+            <p class="article-content">{{ slot.sport.first.name }}</p>
+            <p class="article-content">{{ slot.court.first.name }}</p>
+            <p class="article-content">{{ slot.date }}</p>
+            <p class="article-content">{{ slot.start_time }}</p>
+            <p class="article-content">{{ slot.end_time }}</p>
+            <form action="{%url 'add_slot' slot.id %}" method="POST">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-outline-info">Book Now</button>
+            </form>
+        </div>
+    </article>
+{% endfor %}
+
+{% endblock content %}

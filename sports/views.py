@@ -7,14 +7,14 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib import messages
 from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
-
+import datetime
 
 # Create your views here.
 @login_required
 def add_slot(request, pk):
     slot = Slot.objects.get(id=pk)
     member = Member.objects.get(user=request.user)
-    if len(member.slots.all()) >= 3:
+    if len(member.slots.filter(date=datetime.date.today()).all()) >= 3:
         # If course is already present
         messages.success(request, f'You can book only 3 slots per day!')
         return redirect('slots-home')

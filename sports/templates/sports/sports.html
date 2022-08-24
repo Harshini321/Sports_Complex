@@ -4,8 +4,8 @@
     {% if user == staff.user %}
         <a
             class="btn btn-outline-info btn-sm mt-1 mb-3 mx-1"
-            href="{% url 'slots-create' %}"
-            >Add New Slot</a
+            href="{% url 'sports-create' %}"
+            >Add New Sport</a
         >
     {% endif %}
 {% endfor %}
@@ -24,6 +24,10 @@
         </div>
         <h5>Available courts</h5>
         {% for court in sport.courts.all %}
+            <p class="article-content">{{ court.name }}</p>
+        {% endfor %}
+        <h5>Available slots</h5>
+        {% for slot in sport.courts.all %}
             <p class="article-content">{{ court.name }}</p>
         {% endfor %}
         </div>

@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Sport, Slot,Booked_Slot
+from .models import Sport, Slot, Booked_Slot
 from users.models import Member, Staff
 from django.http import HttpResponse
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
@@ -8,6 +8,7 @@ from django.contrib import messages
 from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
 import datetime
+
 
 # Create your views here.
 @login_required
@@ -57,13 +58,12 @@ class SportListView(ListView):
     model = Sport
     template_name = 'sports/sports.html'
     context_object_name = 'sports'
-    extra_context = {'staffs': Staff.objects.all()}
+    extra_context = {'staffs': Staff.objects.all(), 'slots': Slot}
 
 
 class SlotDetailView(DetailView):
     model = Slot
     context_object_name = 'slot'
-
 
 
 class SportDetailView(DetailView):

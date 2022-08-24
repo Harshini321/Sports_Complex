@@ -26,10 +26,6 @@
         {% for court in sport.courts.all %}
             <p class="article-content">{{ court.name }}</p>
         {% endfor %}
-        <h5>Available slots</h5>
-        {% for slot in sport.courts.all %}
-            <p class="article-content">{{ court.name }}</p>
-        {% endfor %}
         </div>
     </article>
 {% endfor %}

@@ -17,8 +17,8 @@ class Sport(models.Model):
 
 
 class Slot(models.Model):
-    sport = models.ManyToManyField(Sport, blank=True)
-    court = models.ManyToManyField(Court, blank=True)
+    sport = models.ForeignKey(Sport,on_delete=models.CASCADE,default='')
+    court = models.ForeignKey(Court,on_delete=models.CASCADE,default='')
     date = models.DateField()
     start_time = models.TimeField()
     end_time = models.TimeField()

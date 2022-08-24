@@ -58,7 +58,7 @@ class SportListView(ListView):
     model = Sport
     template_name = 'sports/sports.html'
     context_object_name = 'sports'
-    extra_context = {'staffs': Staff.objects.all(), 'slots': Slot}
+    extra_context = {'staffs': Staff.objects.all(), 'slots': Slot.objects.all()}
 
 
 class SlotDetailView(DetailView):

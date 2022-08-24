@@ -14,6 +14,7 @@ class Profile(models.Model):
 
 class Admin(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+    slots = models.ManyToManyField(Slot, blank=True)
 
     def __str__(self):
         return self.user.username
@@ -21,6 +22,7 @@ class Admin(models.Model):
 
 class Staff(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+    slots = models.ManyToManyField(Slot, blank=True)
 
     def __str__(self):
         return self.user.username

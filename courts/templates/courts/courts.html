@@ -23,7 +23,14 @@
                 <h2><a class="article-title" href="{% url 'courts-detail' court.id %}">{{ court.name }}</h2>
             </div>
             <p class="article-content">{{ court.capacity }}</p>
+            <h5>Available slots</h5>
+            {% for slot in slots %}
+                {% if slot.court == court %}
+                    <p class="article-content">slot : {{ slot.id }}</p>
+                {% endif %}
+            {% endfor %}
         </div>
+
     </article>
 {% endfor %}
 

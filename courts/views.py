@@ -3,6 +3,7 @@ from .models import Court
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from users.models import Staff
+from sports.models import Slot
 
 # Create your views here.
 def courts(request):
@@ -16,7 +17,7 @@ class CourtListView(ListView):
     model = Court
     template_name = 'courts/courts.html'
     context_object_name = 'courts'
-    extra_context = {'staffs': Staff.objects.all()}
+    extra_context = {'staffs': Staff.objects.all(), 'slots': Slot.objects.all()}
 
 
 class CourtDetailView(DetailView):

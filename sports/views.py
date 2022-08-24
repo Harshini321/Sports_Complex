@@ -5,7 +5,7 @@ from django.http import HttpResponse
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib import messages
-from django.shortcuts import redirect
+from django.shortcuts import redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 import datetime
 
@@ -50,12 +50,19 @@ class SlotListView(ListView):
     model = Slot
     template_name = 'sports/slots.html'
     context_object_name = 'slots'
-    extra_context = {'staffs': Staff.objects.all()}
+    extra_context = {'staffs': Staff.objects.all(), 'sports': Sport.objects.all()}
     ordering = ['-date']
 
 
+class SportSlotListView(ListView):
+    model = Slot
+    template_name = 'sports/sport_slots.html'
+    context_object_name = 'slots'
+    extra_context = {'staffs': Staff.objects.all()}
 
-
+    def get_queryset(self):
+        sport = get_object_or_404(Sport, name=self.kwargs.get('name'))
+        return Slot.objects.filter(sport=sport).order_by('-date')
 
 
 class SportListView(ListView):

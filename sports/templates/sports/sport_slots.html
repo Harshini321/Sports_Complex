@@ -1,5 +1,6 @@
 {% extends 'sports/base.html' %}
 {% block content %}
+    <h1 class="mb-3">Slots for {{ view.kwargs.name }}</h1>
 {% for staff in staffs %}
     {% if user == staff.user %}
         <a
@@ -13,19 +14,6 @@
     <a class="btn btn-outline-info btn-sm mt-1 mb-3 mx-1"
        href="{% url 'slots-create' %}">Add New Slot</a>
 {% endif %}
-
-    <div class="dropdown show mb-3">
-      <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        Filter By Sports
-      </a>
-
-      <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-          {% for sport in sports %}
-              <a class="dropdown-item" href="{% url 'sport-slots' sport.name %}">{{ sport.name }}</a>
-          {% endfor %}
-      </div>
-    </div>
-
 {% for slot in slots %}
     <article class="media content-section">
         <div class="media-body">

@@ -54,6 +54,10 @@ class SlotListView(ListView):
     ordering = ['-date']
 
 
+
+
+
+
 class SportListView(ListView):
     model = Sport
     template_name = 'sports/sports.html'

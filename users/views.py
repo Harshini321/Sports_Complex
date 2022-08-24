@@ -3,6 +3,7 @@ from django.contrib import messages
 from .forms import UserRegistrationForm, UserUpdateForm, ProfileUpdateForm
 from django.contrib.auth.decorators import login_required
 from .models import Member
+import datetime
 
 
 # Create your views here.
@@ -35,6 +36,7 @@ def profile(request):
     context = {
         'u_form': u_form,
         'p_form': p_form,
-        'member': Member.objects.filter(user=request.user).first()
+        'member': Member.objects.filter(user=request.user).first(),
+        'date': datetime.date.today()
     }
     return render(request, 'users/profile.html', context)

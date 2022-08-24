@@ -9,14 +9,23 @@
           <p class="text-secondary">{{ user.email }}</p>
         </div>
       </div>
-        <legend class="border-bottom mb-4">Booked Slots</legend>
+        <legend class="border-bottom mb-4">Booked Slots : Today</legend>
+        {% for slot in member.slots.all %}
+            {% if slot.date == date %}
+                <div>
+                    <p class="article-content">Slot : {{ slot.id }}</p>
+                    <form action="{%url 'remove_slot' slot.id %}" method="POST">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-outline-info">Cancel Booking</button>
+                    </form>
+                </div>
+            {% endif %}
+
+        {% endfor %}
+        <legend class="border-bottom mb-4">Booked Slots : All</legend>
         {% for slot in member.slots.all %}
             <div>
                 <p class="article-content">Slot : {{ slot.id }}</p>
-                <form action="{%url 'remove_slot' slot.id %}" method="POST">
-                    {% csrf_token %}
-                    <button type="submit" class="btn btn-outline-info">Cancel Booking</button>
-                </form>
             </div>
         {% endfor %}
       <!-- FORM HERE -->

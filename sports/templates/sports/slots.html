@@ -10,12 +10,15 @@
     {% endif %}
 {% endfor %}
 {% if user.is_superuser %}
-    <a
-            class="btn btn-outline-info btn-sm mt-1 mb-3 mx-1"
-            href="{% url 'slots-create' %}"
-            >Add New Slot</a
-    >
+    <a class="btn btn-outline-info btn-sm mt-1 mb-3 mx-1"
+       href="{% url 'slots-create' %}">Add New Slot</a>
 {% endif %}
+    <a class="btn btn-outline-info btn-sm mt-1 mb-3 mx-1"
+       href="{% url 'slots-create' %}">Filter By Sport
+    </a>
+    <a class="btn btn-outline-info btn-sm mt-1 mb-3 mx-1"
+       href="{% url 'slots-create' %}">Filter By Court
+    </a>
 {% for slot in slots %}
     <article class="media content-section">
         <div class="media-body">
@@ -23,8 +26,8 @@
             <h2><a class="article-title" href="{% url 'slots-detail' slot.id %}">Slot : {{slot.id}}</h2>
         </div>
         <h5>Available courts</h5>
-            <p class="article-content">{{ slot.sport.first.name }}</p>
-            <p class="article-content">{{ slot.court.first.name }}</p>
+            <p class="article-content">{{ slot.sport.name }}</p>
+            <p class="article-content">{{ slot.court.name }}</p>
             <p class="article-content">{{ slot.date }}</p>
             <p class="article-content">{{ slot.start_time }}</p>
             <p class="article-content">{{ slot.end_time }}</p>

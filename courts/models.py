@@ -12,3 +12,4 @@ class Court(models.Model):
 
     def get_absolute_url(self):
         return reverse('courts-detail', kwargs={'pk': self.pk})
+

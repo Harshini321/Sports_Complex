@@ -22,7 +22,7 @@ from sports.views import (SlotListView,
                           SlotCreateView,
                           SlotUpdateView,
                           SlotDeleteView,
-                        SportSlotListView,
+                          SportSlotListView,
                           SportListView,
                           SportDetailView,
                           SportCreateView,
@@ -40,13 +40,12 @@ from django.conf.urls.static import static
 from sports.views import add_slot
 from sports.views import remove_slot
 
-
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('register/', user_views.register,name='register'),
-    path('profile/', user_views.profile,name='profile'),
-    path('login/', auth_views.LoginView.as_view(template_name='users/login.html'),name='login'),
-    path('logout/', auth_views.LogoutView.as_view(template_name='users/logout.html'),name='logout'),
+    path('register/', user_views.register, name='register'),
+    path('profile/', user_views.profile, name='profile'),
+    path('login/', auth_views.LoginView.as_view(template_name='users/login.html'), name='login'),
+    path('logout/', auth_views.LogoutView.as_view(template_name='users/logout.html'), name='logout'),
     path('', sports_view.home, name='main-home'),
     path('sports/', SportListView.as_view(), name='sports-home'),
     path('slots/', SlotListView.as_view(), name='slots-home'),
@@ -54,12 +53,13 @@ urlpatterns = [
     path('slots/new/', SlotCreateView.as_view(), name='slots-create'),
     path('slots/<int:pk>/update', SlotUpdateView.as_view(), name='slots-update'),
     path('slots/<int:pk>/delete', SlotDeleteView.as_view(), name='slots-delete'),
-    path('sports/<str:name>/', SportSlotListView.as_view(), name='sport-slots'),
+
     path('sports/<int:pk>/', SportDetailView.as_view(), name='sports-detail'),
+    path('sports/<str:name>/', SportSlotListView.as_view(), name='sport-slots'),
     path('sports/new/', SportCreateView.as_view(), name='sports-create'),
     path('sports/<int:pk>/update', SportUpdateView.as_view(), name='sports-update'),
     path('sports/<int:pk>/delete', SportDeleteView.as_view(), name='sports-delete'),
-    path('courts/',CourtListView.as_view(), name='courts-home'),
+    path('courts/', CourtListView.as_view(), name='courts-home'),
     path('courts/<int:pk>/', CourtDetailView.as_view(), name='courts-detail'),
     path('courts/new/', CourtCreateView.as_view(), name='courts-create'),
     path('courts/<int:pk>/update', CourtUpdateView.as_view(), name='courts-update'),
@@ -69,4 +69,4 @@ urlpatterns = [
 ]
 
 if settings.DEBUG:
-    urlpatterns+=static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

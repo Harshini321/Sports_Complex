@@ -1,6 +1,7 @@
 from django.db import models
 from django.urls import reverse
-
+# from users.models import Member
+# from sports.models import Slot
 
 # Create your models here.
 class Court(models.Model):
@@ -12,4 +13,5 @@ class Court(models.Model):
 
     def get_absolute_url(self):
         return reverse('courts-detail', kwargs={'pk': self.pk})
+
 

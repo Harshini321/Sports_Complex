@@ -53,7 +53,6 @@ urlpatterns = [
     path('slots/new/', SlotCreateView.as_view(), name='slots-create'),
     path('slots/<int:pk>/update', SlotUpdateView.as_view(), name='slots-update'),
     path('slots/<int:pk>/delete', SlotDeleteView.as_view(), name='slots-delete'),
-
     path('sports/<int:pk>/', SportDetailView.as_view(), name='sports-detail'),
     path('sports/<str:name>/', SportSlotListView.as_view(), name='sport-slots'),
     path('sports/new/', SportCreateView.as_view(), name='sports-create'),

@@ -1,7 +1,8 @@
 body {
     background: #fafafa;
     color: #444444;
-    margin-top: 5rem;
+    padding-top: 62px;
+    /*margin-top: 5rem;*/
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -10,10 +11,6 @@ body {
 
   ul {
     margin: 0;
-  }
-
-  .bg-steel {
-    background-color: #79589f;
   }
 
   .site-header .navbar-nav .nav-link {
@@ -71,7 +68,6 @@ body {
     height: 25px;
     vertical-align: middle;
   }
-
   .account-img {
     height: 125px;
     width: 125px;
@@ -84,17 +80,270 @@ body {
   }
 
   .btn{
-    color:#79589f !important;
-    border-color: #79589f;
+    color:#0468d7 !important;
+    border-color: #0468d7;
+
   }
   .btn:hover{
-    background-color: #79589f;
-    color: #ffffff !important;
+    /*background-color:#043875;*/
+    /*background-image: linear-gradient(45deg,#041e3c,#0468d7) !important;*/
+      border-color: #f25d50;
+        color: #f25d50 !important;
   }
-.color{
-  color: #79589f !important;
-}
+
 .delete{
   color:#ffffff !important;
   border-color:red;
+}
+
+/*dashboard*/
+.dashboard{
+  text-align: center;
+  color:#041e3c;
+}
+.dashboard-link{
+  border-left: 4px solid #f25d50 !important;
+  padding: 2px !important;
+}
+.dashboard-href{
+  font-size: 18px;
+  margin-left: 3%;
+  margin-top: 1%;
+  margin-bottom: 1%;
+  color: #041e3c;
+}
+.dashboard-href:hover{
+  color: #009DAE;
+}
+
+/*nav-bar*/
+.bg-steel {
+  background-color: #041e3c;
+}
+.nav-head{
+  font-size: 24px;
+}
+.nav-href {
+  font-size: 18px;
+}
+.site-header1{
+  margin-bottom: 2%;
+}
+
+/*home-page*/
+.mar-rem{
+  padding-left: 0px !important;
+  padding-right: 0px !important;
+}
+#banner{
+    /*background-image: linear-gradient(#041e3c, #0553b1);*/
+    color: #041e3c;
+    /*padding-top: 5%;*/
+    /*height: 700px;*/
+}
+
+.home-title{
+    font-size:50px;
+    font-weight: 600;
+    /*margin-top: 100px;*/
+}
+.home-text{
+    font-size: 30px;
+    /*color:#13b9fd;*/
+}
+.home-left-div{
+  padding-left: 8%;
+  padding-top: 13%;
+    padding-bottom: 10%;
+}
+
+
+#banner a{
+    margin: 20px auto;
+    padding: 15px 70px;
+    text-align: center;
+}
+
+.img-box{
+  background: #0468d7;
+  top: 0;
+}
+
+/*featured-section*/
+.scrollmenu {
+  overflow: auto;
+  white-space: nowrap;
+    margin-bottom: 5%;
+}
+.scrollmenu::-webkit-scrollbar {
+    display: none;
+}
+
+.scrollmenu{
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+
+.random {
+  display: inline-block;
+  /*text-align: center;*/
+  /*padding: 14px;*/
+  text-decoration: none;
+}
+#info {
+    margin: 50px 0;
+}
+.info_head{
+    margin: 0 auto 30px auto;
+    text-align: center;
+}
+.info_head h2{
+    font-weight: 600;
+    color: #041e3c;
+}
+
+/*new home*/
+.home-div{
+    height: 100vh;
+    background: #fafafa;
+    position: relative;
+}
+.home-info{
+    margin-left: 8%;
+    margin-top: 15%;
+}
+.home-info h1{
+    font-size: 70px;
+    color: #041e3c;
+    margin-bottom: 20px;
+}
+.home-info p{
+    color: #041e3c;
+    line-height: 22px;
+}
+
+.image-box1{
+    width: 45%;
+    height: 80%;
+    position: absolute;
+    bottom: 0;
+    right: 100px;
+}
+.image-box img{
+    height: 100%;
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    transition: bottom 1s,left 1s;
+}
+.image-box:hover .back-img{
+    bottom: 40px;
+}
+
+.image-box:hover .main-img{
+    left: 54%;
+}
+
+
+/*trending sports*/
+.sports{
+    width: 100%;
+    min-height: 100vh;
+    background-image: url("../../../media/background.png");
+    background-position: center;
+    background-size: cover;
+    padding: 10px 10%;
+    overflow: hidden;
+    /*position: relative;*/
+}
+.sports-content{
+    margin-top: 10%;
+    max-width: 600px;
+}
+.tt-img{
+    width: 530px;
+    /*position: absolute;*/
+    bottom: 0;
+    left: 10%;
+}
+.sports-right-div{
+    padding-top: 15%;
+    padding-left: 10%;
+}
+
+/*featured matches*/
+.featured-head{
+    margin-top: 8%;
+    font-size: 50px;
+    color: #009DAE !important;
+}
+
+.card-para{
+  text-overflow: ellipsis !important;
+    word-wrap:break-word !important;
+}
+.card-para{
+   white-space: pre-wrap;      /* Webkit */
+   white-space: -moz-pre-wrap; /* Firefox */
+   white-space: -o-pre-wrap;   /* Opera 7 */
+   word-wrap: break-word;      /* IE */
+}
+
+.card{
+    padding-top: 20px;
+    padding-bottom: 50px;
+    text-align: center;
+    margin-top: 20px;
+    border-radius: 20px;
+}
+.space{
+    margin-bottom: 150px;
+}
+.col-md-6 a:hover {
+    color:#ECD662;
+}
+.card-title{
+    margin: 10px 20px 0;
+    text-align: center;
+    color: #f25d50;
+    font-size: 35px;
+}
+.card-text{
+    font-size: 20px;
+    text-align:center;
+    color: #63666A;
+}
+
+/*contactus*/
+
+#contact{
+    text-align: center;
+    bottom: 0 !important;
+}
+.con{
+    padding: 5px 0 25px;
+    bottom: 0 !important;
+}
+.icons img{
+    width: 40px;
+    transition: 0.5s;
+}
+.icons a:hover img{
+    transform: translateY(-5px);
+}
+
+.contact-text{
+    font-size: 20px;
+    color: white;
+}
+#contact{
+    margin-top: 5% !important;
+    padding-top: 2%;
+    text-align: center;
+    /*background-image: linear-gradient( #0468d7, #041e3c);*/
+    background-color: #041e3c;
+    color: white;
+    margin: 0 auto 0;
 }

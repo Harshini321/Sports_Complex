@@ -1,4 +1,93 @@
-{% extends "sports/base.html" %}
+{% extends "sports/base1.html" %}
 {% block content %}
-    <h1>Home page new</h1>
+{#home#}
+    <section id="banner">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-6 home-left-div">
+                    <p class="home-title"><span style="color:#f25d50">EXPLORE</span> <br>FEATURED MATCHES</p>
+                    <p class="home-text">And <span style="color:#13b9fd">Trending</span> Sports!</p>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <a href="{% url 'slots-home' %}" class="btn btn-outline btn-lg btn-block active move" role="button" aria-pressed="true">Book Your Slot Now</a>
+                        </div>
+                        <div class="col-md-6">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 home-right-div">
+                    <div class="image-box">
+                        <img src="media/ball1.png" alt="ball" class="back-img">
+                        <img src="media/badminton2.png" alt="badminton" class="main-img">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{#    trending sports#}
+    <div class="sports">
+    <div class="row">
+        <div class="col-md-6 sports-left-div">
+{#            <img src="media/tt.png" alt="table-tennis" class="tt-img">#}
+        </div>
+        <div class="col-md-6 sports-right-div">
+            <p class="home-title"><span style="color:#f25d50">EXPLORE</span> <br>FEATURED MATCHES</p>
+            <p class="home-text">And <span style="color:#13b9fd">Trending</span> Sports!</p>
+            <div class="row">
+                <div class="col-md-6">
+                    <a href="{% url 'slots-home' %}" class="btn btn-outline btn-lg btn-block active move" role="button" aria-pressed="true">Book Your Slot Now</a>
+                </div>
+                <div class="col-md-6">
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+
+
+{#    Featured matches#}
+            <div class="container-fluid">
+                <div class="info_head">
+                    <h2 class="featured-head">FEATURED MATCHES</h2>
+                </div>
+                <div class="scrollmenu">
+                      <div class="col-sm-5 random">
+                        <div class="shadow-lg card ">
+                          <div class="card-body">
+                            <h5 class="card-title py-2">Special title treatment</h5>
+                            <p class="card-text card-para py-3 px-3">With supporting text below as a natural lead-in to additional content.text below as a natural lead-in to additional content.text below as a natural lead-in to additional content.</p>
+                            <a href="#" class="btn btn-outline btn-lg">Go somewhere</a>
+                          </div>
+                        </div>
+                      </div>
+                    <div class="col-sm-5 random">
+                        <div class="shadow-lg card ">
+                          <div class="card-body">
+                            <h5 class="card-title py-2">Special title treatment</h5>
+                            <p class="card-text card-para py-3 px-3">With supporting text below as a natural lead-in to additional content.text below as a natural lead-in to additional content.text below as a natural lead-in to additional content.</p>
+                            <a href="#" class="btn btn-outline btn-lg">Go somewhere</a>
+                          </div>
+                        </div>
+                      </div>
+                    <div class="col-sm-5 random">
+                        <div class="shadow-lg card ">
+                          <div class="card-body">
+                            <h5 class="card-title py-2">Special title treatment</h5>
+                            <p class="card-text card-para py-3 px-3">With supporting text below as a natural lead-in to additional content.text below as a natural lead-in to additional content.text below as a natural lead-in to additional content.</p>
+                            <a href="#" class="btn btn-outline btn-lg">Go somewhere</a>
+                          </div>
+                        </div>
+                      </div>
+                    <div class="col-sm-5 random">
+                        <div class="shadow-lg card ">
+                          <div class="card-body">
+                            <h5 class="card-title py-2">Special title treatment</h5>
+                            <p class="card-text card-para py-3 px-3">With supporting text below as a natural lead-in to additional content.text below as a natural lead-in to additional content.text below as a natural lead-in to additional content.</p>
+                            <a href="#" class="btn btn-outline btn-lg">Go somewhere</a>
+                          </div>
+                        </div>
+                      </div>
+                </div>
+            </div>
 {% endblock content %}

@@ -5,19 +5,14 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="{% static 'sports/main.css' %}">
-    {% if title %}
-        <title>DevClubSC {{title}}</title>
-    {% else %}
-        <title>DevClubSC</title>
-    {% endif %}
+    <title>DevClubSC</title>
 </head>
 <body>
     <!-- navbar -->
-    <header class="site-header site-header1">
+    <header class="site-header">
         <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
           <div class="container-fluid">
             <a class="navbar-brand mr-4 nav-head" href="{% url 'main-home' %}">DevClubSC</a>
@@ -26,7 +21,6 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarToggle">
                 <div class="navbar-nav mr-auto">
-
                 </div>
               <!-- Navbar Right Side -->
               <div class="navbar-nav">
@@ -44,19 +38,15 @@
                     <a class="nav-item nav-link nav-href px-3" href="{% url 'login' %}">Login</a>
                     <a class="nav-item nav-link nav-href px-3" href="{% url 'register' %}">SignUp</a>
                   {% endif %}
-
               </div>
             </div>
           </div>
         </nav>
       </header>
-
-
-
     <!-- overridden content -->
-    <main role="main" class="container min-vh-100">
+    <main role="main" class="container-fluid">
         <div class="row">
-          <div class="col-md-8">
+          <div class="col-md mar-rem">
             {% if messages %}
             {% for message in messages %}
                 <div class='alert alert-{{message.tags}}'>
@@ -66,26 +56,10 @@
             {% endif %}
             {% block content %}{% endblock %}
           </div>
-        <div class="col-md-4">
-            <div class="content-section">
-              <h3 class='dashboard'>Dashboard</h3>
-                <ul class="list-group">
-                  <li class="list-group-item m-2 rounded dashboard-link">
-                    <a class="nav-item nav-link dashboard-href" href="{% url 'sports-home' %}">Sports</a>
-                  </li>
-                  <li class="list-group-item m-2 rounded dashboard-link">
-                    <a class="nav-item nav-link dashboard-href" href="{% url 'courts-home' %}">Courts</a>
-                  </li>
-                  <li class="list-group-item m-2 rounded dashboard-link">
-                    <a class="nav-item nav-link dashboard-href" href="{% url 'slots-home' %}">Slot Booking</a>
-                  </li>
-                </ul>
-            </div>
-          </div>
         </div>
       </main>
     <section id="contact">
-        <div class="container con footer">
+        <div class="container con">
             <p class="contact-text">MADE BY : HARSHINI</p>
             <p class="contact-text">CONTACT US</p>
             <div class="icons">
@@ -94,9 +68,9 @@
                 <a href="#"><img src="images/facebook-icon.png" alt="facebook"></a>
                 <a href="#"><img src="images/linkedin-icon.png" alt="linkedin"></a>
             </div>
+            <p class="mt-2">Copyright ⓒ 2022</p>
         </div>
     </section>
-
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

@@ -74,42 +74,56 @@
                     <h2 class='featured-head'>FEATURED MATCHES</h2>
                 </div>
                 <div class="scrollmenu">
+                    {% for match in matches %}
+
                       <div class="col-sm-5 random ">
                         <div class="shadow-lg card featured-card mb-4">
                           <div class="card-body">
-                            <h5 class="card-title py-2">Special title treatment</h5>
-                            <p class="card-text card-para py-3 px-3">With supporting text below as a natural lead-in to additional content.text below as a natural lead-in to additional content.text below as a natural lead-in to additional content.</p>
-                            <a href="#" class="btn btn-outline btn-lg">Go somewhere</a>
+                            <h5 class="card-title py-2">{{ match.title }}</h5>
+                            <p class="card-text card-para py-3 px-3">{{ match.description }}</p>
+                            <a href="#" class="btn btn-outline btn-lg">Read More</a>
+                            {% for staff in staffs %}
+                              {% if user == staff.user %}
+                              <div class="row">
+                                <div class="col-md-6">
+                                  <a
+                                    class="btn btn-outline btn-block btn-sm mt-3 mb-1"
+                                    href="{% url 'match-update' match.id %}"
+                                    >Update</a
+                                  >
+                                </div>
+                                 <div class="col-md-6">
+                                  <a
+                                    class="btn btn-outline btn-sm btn-block mt-3 mb-1"
+                                    href="{% url 'match-delete' match.id %}"
+                                    >Delete</a
+                                  >
+                                 </div>
+                                </div>
+                              {% endif %}
+                          {% endfor %}
+                          {% if user.is_superuser %}
+                          <div class="row">
+                                <div class="col-md-6">
+                                  <a
+                                    class="btn btn-outline btn-block btn-sm mt-3 mb-1"
+                                    href="{% url 'match-update' match.id %}"
+                                    >Update</a
+                                  >
+                                </div>
+                                 <div class="col-md-6">
+                                  <a
+                                    class="btn btn-outline btn-sm btn-block mt-3 mb-1"
+                                    href="{% url 'match-delete' match.id %}"
+                                    >Delete</a
+                                  >
+                                 </div>
+                                </div>
+                          {% endif %}
                           </div>
                         </div>
                       </div>
-                    <div class="col-sm-5 random">
-                        <div class="shadow-lg card featured-card mb-4">
-                          <div class="card-body">
-                            <h5 class="card-title py-2">Special title treatment</h5>
-                            <p class="card-text card-para py-3 px-3">With supporting text below as a natural lead-in to additional content.text below as a natural lead-in to additional content.text below as a natural lead-in to additional content.</p>
-                            <a href="#" class="btn btn-outline btn-lg">Go somewhere</a>
-                          </div>
-                        </div>
-                      </div>
-                    <div class="col-sm-5 random">
-                        <div class="shadow-lg card featured-card mb-4">
-                          <div class="card-body">
-                            <h5 class="card-title py-2">Special title treatment</h5>
-                            <p class="card-text card-para py-3 px-3">With supporting text below as a natural lead-in to additional content.text below as a natural lead-in to additional content.text below as a natural lead-in to additional content.</p>
-                            <a href="#" class="btn btn-outline btn-lg">Go somewhere</a>
-                          </div>
-                        </div>
-                      </div>
-                    <div class="col-sm-5 random">
-                        <div class="shadow-lg card featured-card mb-4">
-                          <div class="card-body">
-                            <h5 class="card-title py-2">Special title treatment</h5>
-                            <p class="card-text card-para py-3 px-3">With supporting text below as a natural lead-in to additional content.text below as a natural lead-in to additional content.text below as a natural lead-in to additional content.</p>
-                            <a href="#" class="btn btn-outline btn-lg">Go somewhere</a>
-                          </div>
-                        </div>
-                      </div>
+                    {% endfor %}      
                 </div>
             </div>
 

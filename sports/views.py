@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Sport, Slot, Booked_Slot
+from .models import Sport, Slot, Booked_Slot,FeaturedMatch
 from users.models import Member, Staff
 from django.http import HttpResponse
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
@@ -17,10 +17,10 @@ def add_slot(request, pk):
     member = Member.objects.get(user=request.user)
     if len(member.slots.filter(date=datetime.date.today()).all()) >= 3:
         # If course is already present
-        messages.success(request, f'You can book only 3 slots per day!')
+        messages.success(request, f'You can book only 3 slots per day')
         return redirect('slots-home')
     member.slots.add(slot)
-    messages.success(request, f'Your Slot is successfully booked!')
+    messages.success(request, f'Slot Booked Successfully!')
     return redirect('slots-home')
 
 
@@ -36,7 +36,11 @@ def remove_slot(request, pk):
 
 
 def home(request):
-    return render(request, 'sports/home.html')
+    context={
+        'matches':FeaturedMatch.objects.all(),
+        'staffs': Staff.objects.all()
+    }
+    return render(request, 'sports/home.html',context)
 
 
 def sports(request):
@@ -44,6 +48,8 @@ def sports(request):
         'sports': Sport.objects.all()
     }
     return render(request, 'sports/sports.html', context)
+
+
 
 
 class SlotListView(ListView):
@@ -84,6 +90,16 @@ class SportDetailView(DetailView):
     extra_context = {'staffs': Staff.objects.all(), 'slots': Slot.objects.all()}
 
 
+
+class MatchCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
+    model=FeaturedMatch
+    fields=['title','description']
+
+    def test_func(self):
+        if self.request.user.email.startswith('staff') or self.request.user.is_superuser:
+            return True
+        return False
+
 class SlotCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     model = Slot
     fields = ['sport', 'court', 'date', 'start_time', 'end_time']
@@ -97,6 +113,15 @@ class SlotCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
 class SportCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     model = Sport
     fields = ['name', 'courts']
+
+    def test_func(self):
+        if self.request.user.email.startswith('staff') or self.request.user.is_superuser:
+            return True
+        return False
+
+class MatchUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    model = FeaturedMatch
+    fields = ['title','description']
 
     def test_func(self):
         if self.request.user.email.startswith('staff') or self.request.user.is_superuser:
@@ -125,6 +150,17 @@ class SportUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
             return True
         return False
 
+class MatchDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = FeaturedMatch
+    context_object_name = 'match'
+    success_url = '/'
+
+    def test_func(self):
+        if self.request.user.email.startswith('staff') or self.request.user.is_superuser:
+            return True
+        return False
+
+
 
 class SlotDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Slot
@@ -149,11 +185,3 @@ class SportDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
             return True
         return False
 
-# def slots(request):
-#     context = {
-#         'staffs': Member.objects.all(),
-#
-#
-#     }
-#     ordering=['-date']
-#     return render(request, 'sports/slots.html', context)

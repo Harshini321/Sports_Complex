@@ -27,10 +27,9 @@
                 {% if slot.date == date %}
                     <div>
                         <p class='centre-text'><a class="small-text small-a" href="{% url 'slots-detail' slot.id %}">slot : {{ slot.id }}</a></p>
-                        <p class="article-content">Slot : {{ slot.id }}</p>
-                        <form action="{%url 'remove_slot' slot.id %}" method="POST">
+                        <form action="{%url 'remove_slot' slot.id %}" method="POST" class=' centre-text'>
                             {% csrf_token %}
-                            <button type="submit" class="btn btn-outline-info">Cancel Booking</button>
+                            <button type="submit" class="btn btn-outline trending-btn">Cancel Booking</button>
                         </form>
                     </div>
                 {% endif %}

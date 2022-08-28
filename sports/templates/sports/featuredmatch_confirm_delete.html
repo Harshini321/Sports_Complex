@@ -1,0 +1,20 @@
+{% extends "sports/base.html" %}
+{% block content %}
+    <div class="content-section">
+                <form method="POST">
+                    {% csrf_token %}
+                    <fieldset class="form-group">
+                        <legend class="border-bottom mb-4 centre-text delete-head">Delete Featured Match</legend>
+                        <h3 class='delete-text'>Are you sure you want to delete : "{{match.title}}"</h3>
+                    </fieldset>
+                    <div class="form-group centre-text">
+                        <button class="btn btn-danger delete" type="submit">Yes, Delete</button>
+                        <a
+                          class="btn btn-outline"
+                          href="{% url 'main-home' %}"
+                          >Cancel</a
+                        >
+                      </div>
+                </form>
+            </div>
+{% endblock content %}

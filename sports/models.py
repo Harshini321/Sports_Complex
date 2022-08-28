@@ -1,3 +1,4 @@
+from turtle import title
 from django.db import models
 from courts.models import Court
 from django.utils import timezone
@@ -33,3 +34,13 @@ class Slot(models.Model):
 class Booked_Slot(models.Model):
     slot = models.ForeignKey(Slot, on_delete=models.CASCADE)
     booked_by=models.ForeignKey(User,on_delete=models.CASCADE,null=True)
+
+
+class FeaturedMatch(models.Model):
+    title=models.CharField(max_length=50)
+    description=models.TextField()
+    def __str__(self):
+        return self.title
+
+    def get_absolute_url(self):
+        return reverse('main-home')

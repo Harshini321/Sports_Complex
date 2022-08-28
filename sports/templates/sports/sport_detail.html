@@ -2,28 +2,71 @@
 {% block content %}
     <article class="media content-section">
         <div class="media-body">
-        <div class="article-metadata">
-            <h2 class="article-title">{{ sport.name }}</h2>
-        </div>
-        {% if user.email|slice:5 == 'staff' or user.is_superuser%}
-            <div>
-              <a
-                class="btn btn-outline-info btn-sm mt-1 mb-1"
-                href="{% url 'sports-update' sport.id %}"
-                >Update</a
-              >
-              <a
-                class="btn btn-danger btn-sm mt-1 mb-1 delete"
-                href="{% url 'sports-delete' sport.id %}"
-                >Delete</a
-              >
+            <div class="article-metadata">
+                <h2 class="article-title sport-detail-title">{{ sport.name }}</h2>
             </div>
-        {% endif %}
-        <h5>Available courts</h5>
-        {% for court in sport.courts.all %}
-            <p class="article-content">{{ court.name }}</p>
-        {% endfor %}
-
+            <div class="col-md-12 my-4 mx-0">
+                <a
+                  class="btn btn-outline btn-block btn-sm mt-1 mb-1"
+                  href="{% url 'sport-slots' sport.name %}"
+                  >Book Your Slot Now</a
+                >
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class=' border rounded ml-3 py-3'>
+                        <h5 class="centre-text side-header mb-2">Available Courts</h5>
+                        {% for court in sport.courts.all %}
+                            <p class='centre-text'><a class="small-text small-a" href="{% url 'courts-detail' court.id %}">{{ court.name }}</a></p>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class=' border rounded mr-3 py-3'>
+                        <h5 class="centre-text side-header mb-2">Available slots</h5>
+                        {% for slot in slots %}
+                            {% if slot.sport == sport %}
+                                <p class='centre-text'><a class="small-text small-a" href="{% url 'slots-detail' slot.id %}">slot : {{ slot.id }}</a></p>
+                                
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            {% for staff in staffs %}
+                {% if user == staff.user %}
+                     <div class="row">
+                        <div class="col-md-6">
+                          <a
+                            class="btn btn-outline btn-block btn-sm mt-3 mb-1"
+                            href="{% url 'sports-update' sport.id %}"
+                            >Update</a
+                          >
+                        </div>
+                         <div class="col-md-6">
+                          <a
+                            class="btn btn-danger btn-sm btn-block mt-3 mb-1 delete"
+                            href="{% url 'sports-delete' sport.id %}"
+                            >Delete</a
+                          >
+                         </div>
+                        </div>
+                {% endif %}
+            {% endfor %}
+            {% if user.is_superuser %}
+                <div>
+                      <a
+                        class="btn btn-outline-info btn-sm mt-1 mb-1"
+                        href="{% url 'sports-update' sport.id %}"
+                        >Update</a
+                      >
+                      <a
+                        class="btn btn-danger btn-sm mt-1 mb-1 delete"
+                        href="{% url 'sports-delete' sport.id %}"
+                        >Delete</a
+                      >
+                </div>
+            {% endif %}
         </div>
     </article>
 {% endblock content %}

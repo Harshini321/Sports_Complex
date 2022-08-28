@@ -46,16 +46,15 @@ urlpatterns = [
     path('profile/', user_views.profile, name='profile'),
     path('login/', auth_views.LoginView.as_view(template_name='users/login.html'), name='login'),
     path('logout/', auth_views.LogoutView.as_view(template_name='users/logout.html'), name='logout'),
-    path('', sports_view.home, name='main-home'),
     path('sports/', SportListView.as_view(), name='sports-home'),
     path('slots/', SlotListView.as_view(), name='slots-home'),
     path('slots/<int:pk>/', SlotDetailView.as_view(), name='slots-detail'),
     path('slots/new/', SlotCreateView.as_view(), name='slots-create'),
     path('slots/<int:pk>/update', SlotUpdateView.as_view(), name='slots-update'),
     path('slots/<int:pk>/delete', SlotDeleteView.as_view(), name='slots-delete'),
+    path('sports/new/', SportCreateView.as_view(), name='sports-create'),
     path('sports/<int:pk>/', SportDetailView.as_view(), name='sports-detail'),
     path('sports/<str:name>/', SportSlotListView.as_view(), name='sport-slots'),
-    path('sports/new/', SportCreateView.as_view(), name='sports-create'),
     path('sports/<int:pk>/update', SportUpdateView.as_view(), name='sports-update'),
     path('sports/<int:pk>/delete', SportDeleteView.as_view(), name='sports-delete'),
     path('courts/', CourtListView.as_view(), name='courts-home'),
@@ -65,6 +64,7 @@ urlpatterns = [
     path('courts/<int:pk>/delete', CourtDeleteView.as_view(), name='courts-delete'),
     path('slots/<int:pk>/add', add_slot, name='add_slot'),
     path('slots/<int:pk>/remove', remove_slot, name='remove_slot'),
+    path('', sports_view.home, name='main-home'),
 ]
 
 if settings.DEBUG:

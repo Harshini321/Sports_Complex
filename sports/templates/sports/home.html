@@ -5,55 +5,77 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-6 home-left-div">
-                    <p class="home-title"><span style="color:#f25d50">EXPLORE</span> <br>FEATURED MATCHES</p>
-                    <p class="home-text">And <span style="color:#13b9fd">Trending</span> Sports!</p>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <a href="{% url 'slots-home' %}" class="btn btn-outline btn-lg btn-block active move" role="button" aria-pressed="true">Book Your Slot Now</a>
-                        </div>
-                        <div class="col-md-6">
-                        </div>
-                    </div>
+                  <div class="pl-4">
+                      <p class="home-title">EXPLORE <br><span style="color:#f25d50">FEATURED</span> MATCHES</p>
+                      <p class="home-text">And <span style="color:#13b9fd">Trending</span> Sports!</p>
+                      <div class="row">
+                          <div class="col-md-6">
+                              <a href="{% url 'slots-home' %}" class="btn btn-outline btn-lg btn-block active move" role="button" aria-pressed="true">Book Your Slot Now</a>
+                          </div>
+                          <div class="col-md-6">
+                          </div>
+                      </div>
+                  </div>
                 </div>
                 <div class="col-md-6 home-right-div">
                     <div class="image-box">
-                        <img src="media/ball1.png" alt="ball" class="back-img">
-                        <img src="media/badminton2.png" alt="badminton" class="main-img">
+                        {% comment %} <img src="media/ball1.png" alt="ball" class="back-img"> {% endcomment %}
+                        <img src="media/badmintonf.png" alt="badminton" class="main-img">
                     </div>
                 </div>
             </div>
         </div>
     </section>
-{#    trending sports#}
-    <div class="sports">
-    <div class="row">
-        <div class="col-md-6 sports-left-div">
-{#            <img src="media/tt.png" alt="table-tennis" class="tt-img">#}
-        </div>
-        <div class="col-md-6 sports-right-div">
-            <p class="home-title"><span style="color:#f25d50">EXPLORE</span> <br>FEATURED MATCHES</p>
-            <p class="home-text">And <span style="color:#13b9fd">Trending</span> Sports!</p>
-            <div class="row">
-                <div class="col-md-6">
-                    <a href="{% url 'slots-home' %}" class="btn btn-outline btn-lg btn-block active move" role="button" aria-pressed="true">Book Your Slot Now</a>
+
+
+{% comment %} new-trending sport {% endcomment %}
+    <div class="container-fluid">
+      <div class="info_head">
+        <h2 class="trending-head">Explore Trending Sports!</h2>
+      </div>
+      <div class="row">
+        <div class="col-sm-6">
+              <div class="pl-4 random ">
+                <div class="shadow-lg card featured-card mb-4">
+                  <div class="card-body">
+                    <h5 class="card-title py-2 trending-head2">Special title treatment</h5>
+                    <p class="card-text card-para py-3 px-3">With supporting text below as a natural lead-in to additional content.text below as a natural lead-in to additional content.text below as a natural lead-in to additional content.</p>
+                    <a href="#" class="btn btn-outline btn-lg ">Go somewhere</a>
+                  </div>
                 </div>
-                <div class="col-md-6">
-                </div>
+              </div>
             </div>
+        <div class="col-sm-6">
+          <div class="pr-4 random ">
+            <div class="shadow-lg card featured-card mb-4">
+              <div class="card-body">
+                <h5 class="card-title py-2 trending-head2">Special title treatment</h5>
+                <p class="card-text card-para py-3 px-3">With supporting text below as a natural lead-in to additional content.text below as a natural lead-in to additional content.text below as a natural lead-in to additional content.</p>
+                <a href="#" class="btn btn-outline btn-lg">Go somewhere</a>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
     </div>
-    </div>
+
+
+
+
+
+
+
 
 
 
 {#    Featured matches#}
             <div class="container-fluid">
                 <div class="info_head">
-                    <h2 class="featured-head">FEATURED MATCHES</h2>
+                    <h2 class='featured-head'>FEATURED MATCHES</h2>
                 </div>
                 <div class="scrollmenu">
-                      <div class="col-sm-5 random">
-                        <div class="shadow-lg card ">
+                      <div class="col-sm-5 random ">
+                        <div class="shadow-lg card featured-card mb-4">
                           <div class="card-body">
                             <h5 class="card-title py-2">Special title treatment</h5>
                             <p class="card-text card-para py-3 px-3">With supporting text below as a natural lead-in to additional content.text below as a natural lead-in to additional content.text below as a natural lead-in to additional content.</p>
@@ -62,7 +84,7 @@
                         </div>
                       </div>
                     <div class="col-sm-5 random">
-                        <div class="shadow-lg card ">
+                        <div class="shadow-lg card featured-card mb-4">
                           <div class="card-body">
                             <h5 class="card-title py-2">Special title treatment</h5>
                             <p class="card-text card-para py-3 px-3">With supporting text below as a natural lead-in to additional content.text below as a natural lead-in to additional content.text below as a natural lead-in to additional content.</p>
@@ -71,7 +93,7 @@
                         </div>
                       </div>
                     <div class="col-sm-5 random">
-                        <div class="shadow-lg card ">
+                        <div class="shadow-lg card featured-card mb-4">
                           <div class="card-body">
                             <h5 class="card-title py-2">Special title treatment</h5>
                             <p class="card-text card-para py-3 px-3">With supporting text below as a natural lead-in to additional content.text below as a natural lead-in to additional content.text below as a natural lead-in to additional content.</p>
@@ -80,7 +102,7 @@
                         </div>
                       </div>
                     <div class="col-sm-5 random">
-                        <div class="shadow-lg card ">
+                        <div class="shadow-lg card featured-card mb-4">
                           <div class="card-body">
                             <h5 class="card-title py-2">Special title treatment</h5>
                             <p class="card-text card-para py-3 px-3">With supporting text below as a natural lead-in to additional content.text below as a natural lead-in to additional content.text below as a natural lead-in to additional content.</p>
@@ -90,4 +112,5 @@
                       </div>
                 </div>
             </div>
+
 {% endblock content %}

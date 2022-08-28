@@ -25,6 +25,7 @@ class CourtListView(ListView):
 class CourtDetailView(DetailView):
     model = Court
     context_object_name = 'court'
+    extra_context = {'staffs': Staff.objects.all(), 'slots': Slot.objects.all(), 'ratings': Rating.objects.all()}
 
 
 class CourtCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):

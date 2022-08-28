@@ -20,7 +20,7 @@ def add_slot(request, pk):
         messages.success(request, f'You can book only 3 slots per day!')
         return redirect('slots-home')
     member.slots.add(slot)
-    messages.success(request, f'You Slot is successfully booked!')
+    messages.success(request, f'Your Slot is successfully booked!')
     return redirect('slots-home')
 
 
@@ -75,11 +75,13 @@ class SportListView(ListView):
 class SlotDetailView(DetailView):
     model = Slot
     context_object_name = 'slot'
+    extra_context = {'staffs': Staff.objects.all(), 'slots': Slot.objects.all()}
 
 
 class SportDetailView(DetailView):
     model = Sport
     context_object_name = 'sport'
+    extra_context = {'staffs': Staff.objects.all(), 'slots': Slot.objects.all()}
 
 
 class SlotCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):

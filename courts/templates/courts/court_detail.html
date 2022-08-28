@@ -3,24 +3,72 @@
     <article class="media content-section">
         <div class="media-body">
         <div class="article-metadata">
-            <h2 class="article-title">{{court.name}}</h2>
+            <h2 class="article-title sport-detail-title">{{court.name}}</h2>
         </div>
-        {% if user.email|slice:5 == 'staff' or user.is_superuser%}
-            <div>
-              <a
-                class="btn btn-outline-info btn-sm mt-1 mb-1"
-                href="{% url 'courts-update' court.id %}"
-                >Update</a
-              >
-              <a
-                class="btn btn-danger btn-sm mt-1 mb-1 delete"
-                href="{% url 'courts-delete' court.id %}"
-                >Delete</a
-              >
+        <p class="article-content centre-text small-text mt-3">Court Capacity : {{ court.capacity }}</p>
+        <div class="row">
+          <div class="col-md-6">
+            <div class=' border rounded ml-3 py-3'>
+              <h5 class="centre-text side-header mb-2">Available slots</h5>
+              {% for slot in slots %}
+                  {% if slot.court == court %}
+                      <p class='centre-text'><a class="small-text small-a" href="{% url 'slots-detail' slot.id %}">slot : {{ slot.id }}</a></p>
+                  {% endif %}
+              {% endfor %}
             </div>
-        {% endif %}
-        <p class="article-content">{{ court.capacity }}</p>
-
+          </div>
+          <div class="col-md-6">
+            <div class=' border rounded mr-3 py-3'>
+              <h5 class="centre-text side-header mb-2">Rating</h5>
+              {% for rating in ratings %}
+                  {% if rating.court == court %}
+                      <p class="article-content centre-text small-text mt-3">{{ rating.rating }}</p>
+                  {% endif %}
+              {% endfor %}
+                <div class='m-3'>
+                  <a
+                      class="btn btn-outline btn-block btn-sm "
+                      href="#"
+                      >Add Rating</a
+                  >
+                </div>
+            </div>
+          </div>
+        </div>
+              {% for staff in staffs %}
+                {% if user == staff.user %}
+                     <div class="row">
+                        <div class="col-md-6">
+                          <a
+                            class="btn btn-outline btn-block btn-sm mt-3 mb-1"
+                            href="{% url 'courts-update' court.id %}"
+                            >Update</a
+                          >
+                        </div>
+                         <div class="col-md-6">
+                          <a
+                            class="btn btn-danger btn-sm btn-block mt-3 mb-1 delete"
+                            href="{% url 'courts-delete' court.id %}"
+                            >Delete</a
+                          >
+                         </div>
+                        </div>
+                {% endif %}
+            {% endfor %}
+            {% if user.is_superuser %}
+                <div>
+                      <a
+                        class="btn btn-outline-info btn-sm mt-1 mb-1"
+                        href="{% url 'sports-update' sport.id %}"
+                        >Update</a
+                      >
+                      <a
+                        class="btn btn-danger btn-sm mt-1 mb-1 delete"
+                        href="{% url 'sports-delete' sport.id %}"
+                        >Delete</a
+                      >
+                </div>
+            {% endif %}
         </div>
     </article>
 {% endblock content %}

@@ -3,7 +3,7 @@
 {% for staff in staffs %}
     {% if user == staff.user %}
         <a
-            class="btn btn-outline-info btn-sm mt-1 mb-3 mx-1"
+            class="btn btn-outline btn-block btn-lg mt-1 mb-3"
             href="{% url 'courts-create' %}"
             >Add New Court</a
         >
@@ -11,30 +11,19 @@
 {% endfor %}
 {% if user.is_superuser %}
     <a
-            class="btn btn-outline-info btn-sm mt-1 mb-3 mx-1"
+            class="btn btn-outline btn-block btn-lg mt-1 mb-3"
             href="{% url 'courts-create' %}"
             >Add New Court</a
     >
 {% endif %}
 {% for court in courts %}
-    <article class="media content-section">
+    <article class="media content-section shadow-box">
         <div class="media-body">
-            <div class="article-metadata">
-                <h2><a class="article-title" href="{% url 'courts-detail' court.id %}">{{ court.name }}</h2>
+            <div class="article-metadata sport-title-div">
+                <h2><a class="article-title sport-title" href="{% url 'courts-detail' court.id %}">{{ court.name }}</a></h2>
             </div>
-            <p class="article-content">{{ court.capacity }}</p>
-            <h5>Available slots</h5>
-            {% for slot in slots %}
-                {% if slot.court == court %}
-                    <p class="article-content">slot : {{ slot.id }}</p>
-                {% endif %}
-            {% endfor %}
-            <h5>Rating</h5>
-            {% for rating in ratings %}
-                {% if rating.court == court %}
-                    <p class="article-content">{{ rating.rating }}</p>
-                {% endif %}
-            {% endfor %}
+            <p class="sports-article-content">Court Capacity : {{ court.capacity }}</p>
+            <p class="sports-article-content">Est dolore velit qui reiciendis eius aut porro maxime et voluptate doloribus sed voluptatem pariatur. Est tenetur illo est asperiores facere et perferendis incidunt est commodi quas?</p>
         </div>
 
     </article>

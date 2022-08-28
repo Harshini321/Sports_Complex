@@ -2,43 +2,63 @@
 {% load crispy_forms_tags %}
 {% block content %}
     <div class="content-section">
-      <div class="media">
-         <img class="rounded-circle account-img" src="{{ user.profile.image.url }}">
-        <div class="media-body">
-          <h2 class="account-heading">{{ user.username }}</h2>
-          <p class="text-secondary">{{ user.email }}</p>
-        </div>
-      </div>
-        <legend class="border-bottom mb-4">Booked Slots : Today</legend>
-        {% for slot in member.slots.all %}
-            {% if slot.date == date %}
-                <div>
-                    <p class="article-content">Slot : {{ slot.id }}</p>
-                    <form action="{%url 'remove_slot' slot.id %}" method="POST">
-                        {% csrf_token %}
-                        <button type="submit" class="btn btn-outline-info">Cancel Booking</button>
-                    </form>
+      {% comment %} <div class="media"> {% endcomment %}
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class='col-md-6 border rounded py-3 px-3 centre-text'>
+                <img class="rounded-circle account-img" src="{{ user.profile.image.url }}">
+                <div class="media-body">
+                    <h2 class="account-heading ">{{ user.username }}</h2>
+                    <p class="text-secondary">{{ user.email }}</p>
                 </div>
-            {% endif %}
-
-        {% endfor %}
-        <legend class="border-bottom mb-4">Booked Slots : All</legend>
-        {% for slot in member.slots.all %}
-            <div>
-                <p class="article-content">Slot : {{ slot.id }}</p>
             </div>
-        {% endfor %}
+            <div class="col-md-3"></div>
+            {% comment %} <div class='col-md-6 border rounded py-3 px-3'>
+                <div class="media-body">
+                    <h2 class="account-heading ">{{ user.username }}</h2>
+                    <p class="text-secondary">{{ user.email }}</p>
+                </div>
+            </div> {% endcomment %}
+        </div>
+      {% comment %} </div> {% endcomment %}
+        <div class=' border rounded mr-3 py-3 my-3'>
+            <h5 class="centre-text side-header mb-2">Today's Slots</h5>
+            {% for slot in member.slots.all %}
+                {% if slot.date == date %}
+                    <div>
+                        <p class='centre-text'><a class="small-text small-a" href="{% url 'slots-detail' slot.id %}">slot : {{ slot.id }}</a></p>
+                        <p class="article-content">Slot : {{ slot.id }}</p>
+                        <form action="{%url 'remove_slot' slot.id %}" method="POST">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-outline-info">Cancel Booking</button>
+                        </form>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+        <div class=' border rounded mr-3 py-3 my-3'>
+            <h5 class="centre-text side-header mb-2">Recently Booked Slots</h5>
+            {% for slot in member.slots.all %}
+                <div>
+                    <p class='centre-text'><a class="small-text small-a" href="{% url 'slots-detail' slot.id %}">slot : {{ slot.id }}</a></p>
+                </div>
+            {% endfor %}
+        </div>
+        
+        
       <!-- FORM HERE -->
+      <div class=' border rounded mr-3 py-3 my-3 px-3'>
         <form method="POST" enctype='multipart/form-data'>
             {% csrf_token %}
             <fieldset class="form-group">
-                <legend class="border-bottom mb-4">Profile Info</legend>
+                <legend class="border-bottom mb-4 centre-text side-header">Profile Info</legend>
                 {{ u_form|crispy }}
                 {{ p_form|crispy }}
             </fieldset>
             <div class="form-group">
-                <button class="btn btn-outline-info" type="submit">Update</button>
+                <button class="btn btn-outline btn-block btn-lg mt-1 mb-3" type="submit">Update</button>
             </div>
         </form>
+        </div>
     </div>
 {% endblock content %}

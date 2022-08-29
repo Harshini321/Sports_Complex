@@ -426,3 +426,9 @@ body {
   color: #f25d50 !important;
   border-color: #14c2ad;
 }
+.green-col{
+  color: #14c2ad !important;
+}
+.leftshift{
+  text-align: left !important;
+}

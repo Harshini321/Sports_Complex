@@ -32,8 +32,9 @@ class Slot(models.Model):
 
 
 class Booked_Slot(models.Model):
-    slot = models.ForeignKey(Slot, on_delete=models.CASCADE)
-    booked_by=models.ForeignKey(User,on_delete=models.CASCADE,null=True)
+    slots=models.ManyToManyField(Slot,blank=True)
+    def __str__(self):
+        return f'Booked Slots'
 
 
 class FeaturedMatch(models.Model):

@@ -9,17 +9,17 @@ from django.shortcuts import redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 import datetime
 
-
 # Create your views here.
 @login_required
 def add_slot(request, pk):
     slot = Slot.objects.get(id=pk)
     member = Member.objects.get(user=request.user)
+    booked_slot=Booked_Slot.objects.first()
     if len(member.slots.filter(date=datetime.date.today()).all()) >= 3:
-        # If course is already present
         messages.success(request, f'You can book only 3 slots per day')
         return redirect('slots-home')
     member.slots.add(slot)
+    booked_slot.slots.add(slot)
     messages.success(request, f'Slot Booked Successfully!')
     return redirect('slots-home')
 
@@ -28,9 +28,11 @@ def add_slot(request, pk):
 def remove_slot(request, pk):
     slot = Slot.objects.get(id=pk)
     member = Member.objects.get(user=request.user)
+    booked_slot=Booked_Slot.objects.first()
     if member.slots.contains(slot):
         # If course is already present
         member.slots.remove(slot)
+        booked_slot.slots.remove(slot)
         messages.success(request, f'Your slot has been cancelled successfully')
         return redirect('profile')
 
@@ -53,8 +55,16 @@ class SlotListView(ListView):
     model = Slot
     template_name = 'sports/slots.html'
     context_object_name = 'slots'
-    extra_context = {'staffs': Staff.objects.all(), 'sports': Sport.objects.all()}
+    extra_context = {'staffs': Staff.objects.all(), 'sports': Sport.objects.all(),'booked_slots':Booked_Slot.objects.first()}
     ordering = ['-date']
+
+
+class BookedSlotListView(ListView):
+    model = Booked_Slot
+    template_name = 'sports/bookedslots.html'
+    context_object_name = 'slots_unused'
+    extra_context = {'staffs': Staff.objects.all(), 'sports': Sport.objects.all(),'booked_slots':Booked_Slot.objects.first()}
+
 
 
 class SportSlotListView(ListView):

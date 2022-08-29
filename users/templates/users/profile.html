@@ -23,15 +23,21 @@
       {% comment %} </div> {% endcomment %}
         <div class=' border rounded mr-3 py-3 my-3'>
             <h5 class="centre-text side-header mb-2">Today's Slots</h5>
+            <hr>
             {% for slot in member.slots.all %}
                 {% if slot.date == date %}
-                    <div>
-                        <p class='centre-text'><a class="small-text small-a" href="{% url 'slots-detail' slot.id %}">slot : {{ slot.id }}</a></p>
-                        <form action="{%url 'remove_slot' slot.id %}" method="POST" class=' centre-text'>
-                            {% csrf_token %}
-                            <button type="submit" class="btn btn-outline trending-btn">Cancel Booking</button>
-                        </form>
+                    <div class='row'>
+                        <div class='col-md-6 my-2'>
+                            <p class='centre-text'><a class="small-text small-a" href="{% url 'slots-detail' slot.id %}">slot : {{ slot.id }}</a></p>
+                        </div>
+                        <div class='col-md-6 my-2'>
+                            <form action="{%url 'remove_slot' slot.id %}" method="POST" class=' centre-text'>
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-outline trending-btn">Cancel Booking</button>
+                            </form>
+                        </div>
                     </div>
+                    <hr>
                 {% endif %}
             {% endfor %}
         </div>
@@ -55,7 +61,7 @@
                 {{ p_form|crispy }}
             </fieldset>
             <div class="form-group">
-                <button class="btn btn-outline btn-block btn-lg mt-1 mb-3" type="submit">Update</button>
+                <button class="btn btn-outline btn-block btn-lg mt-1 mb-3 trending-btn" type="submit">Update</button>
             </div>
         </form>
         </div>

@@ -36,7 +36,7 @@
                     <a class="nav-item nav-link nav-href px-3" href="{% url 'courts-home' %}">Courts</a>
                     <a class="nav-item nav-link nav-href px-3" href="{% url 'slots-home' %}">Slots</a>
                   {% if user.is_authenticated or user.email|slice:5 == 'staff' %}
-                      <a class="nav-item nav-link nav-href px-3" href="#">BookedSlots</a>
+                      <a class="nav-item nav-link nav-href px-3" href="{% url 'bookedslots-home' %}">BookedSlots</a>
                   {% endif %}
                   {% if user.is_authenticated %}
                     <a class="nav-item nav-link nav-href px-3" href="{% url 'profile' %}">Profile</a>

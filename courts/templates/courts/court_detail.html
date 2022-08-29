@@ -92,92 +92,120 @@
           </button>
         </form>
       </div>
-      <div class="border rounded mt-4 py-3 px-3">
-        {% for comment in comments %} {% if comment.court.name == court.name %}
-        {% if not comment.parent %}
-          <article class="media content-section">
-            <img
-              class="rounded-circle article-img"
-              src="{{ comment.user.profile.image.url }}"
-            />
-            <div class="media-body">
-              <div class="article-metadata">
-                <a class="mr-2" href="#">{{ comment.user.username }}</a>
-                <small class="text-muted"
-                  >{{ comment.timestamp | date:'F d, Y' }}</small
-                >
-              </div>
-              <p class="article-content">{{ comment.comment }}</p>
-              <p>
-                <a
-                  class="btn btn-outline trending-btn"
-                  data-toggle="collapse"
-                  href="#repylBox{{comment.sno}}"
-                  role="button"
-                  aria-expanded="false"
-                  aria-controls="repylBox{{comment.sno}}"
-                >
-                  Reply
-                </a>
-              </p>
-              <div class="collapse" id="repylBox{{comment.sno}}">
-                <div class="card card-body">
-                  <form action="{%url 'courts-comment' court.id %}" method="POST">
-                    {% csrf_token %}
-                    <div class="form-group">
-                      <label for="comment">Reply</label>
-                      <input
-                        type="text"
-                        class="form-control"
-                        id="exampleFormControlInput1"
-                        name="comment"
-                        placeholder="Add Comment.."
-                      />
-                      <input
-                        type="hidden"
-                        name="parentsno"
-                        value="{{ comment.sno }}"
-                      />
-                    </div>
-                    <input type="hidden" name="CourtSno" value="{{ court.id }}" />
-                    <button type="submit" class="btn btn-outline trending-btn">
-                      Post Reply
-                    </button>
-                  </form>
-                  
+
+      <p>
+        <a class="btn btn-outline trending-btn btn-block my-3" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+          View Comments
+        </a>
+      </p>
+      <div class="collapse" id="collapseExample">
+        <div class="card card-body">
+          <div class="border rounded mt-4 py-3 px-3">
+            {% for comment in comments %} {% if comment.court.name == court.name %}
+            {% if not comment.parent %}
+            <article class="media content-section">
+              <img
+                class="rounded-circle article-img"
+                src="{{ comment.user.profile.image.url }}"
+              />
+              <div class="media-body">
+                <div class="article-metadata leftshift">
+                  <a class="mr-2" href="#">{{ comment.user.username }}</a>
+                  <small class="text-muted"
+                    >{{ comment.timestamp | date:'F d, Y' }}</small
+                  >
                 </div>
-                <div class="border rounded mt-4 py-3 px-3">
-                  <p class="article-content">Replies</p>
-                  {% for reply in comments %} 
+                <p class="article-content leftshift">{{ comment.comment }}</p>
+                <p class='leftshift'>
+                  <a
+                    class=" btn btn-sm btn-outline trending-btn "
+                    data-toggle="collapse"
+                    href="#repylBox{{comment.sno}}"
+                    role="button"
+                    aria-expanded="false"
+                    aria-controls="repylBox{{comment.sno}}"
+                  >
+                    Reply
+                  </a>
+                </p>
+                <div class="collapse" id="repylBox{{comment.sno}}">
+                  <div class="card card-body">
+                    <form action="{%url 'courts-comment' court.id %}" method="POST">
+                      {% csrf_token %}
+                      <div class="form-group leftshift">
+                        <label for="comment" class='px-1'>Add Reply </label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="exampleFormControlInput1"
+                          name="comment"
+                          placeholder="Add Reply.."
+                        />
+                        <input
+                          type="hidden"
+                          name="parentsno"
+                          value="{{ comment.sno }}"
+                        />
+                      </div>
+                      <input type="hidden" name="CourtSno" value="{{ court.id }}" />
+                      <div class="leftshift px-1">
+                        <button type="submit" class="btn btn-sm btn-outline trending-btn leftshift">
+                          Post Reply
+                        </button>
+                      </div>
+                    </form>
+                  </div>
+
+
+                  <p>
+                    <a class="btn btn-outline trending-btn btn-block mt-3" data-toggle="collapse" href="#repylBoxnew{{comment.sno}}" role="button" aria-expanded="false" aria-controls="repylBoxnew{{comment.sno}}">
+                      View Replies
+                    </a>
+                  </p>
+                  <div class="collapse" id="repylBoxnew{{comment.sno}}">
+                    <div class="card card-body">
+                      
+                  <div class="border rounded mt-4 py-3 px-3">
+                    <p class="article-content">Replies</p>
+                    <hr>
+                    {% for reply in comments %} {% comment %}
+                    <p class="article-content">entered</p>
+                    {% endcomment %} {% if reply.court.name == court.name %}
+                    {% comment %} <p class="article-content">reply sno:{{ reply.parent.sno }}</p>
+                    <p class="article-content">comment sno :{{ comment.sno }}</p> {% endcomment %}
+                    {% comment %}
+                    <p class="article-content">entered</p>
+                    {% endcomment %} {% if reply.parent.sno == comment.sno %}
                     {% comment %} <p class="article-content">entered</p> {% endcomment %}
-                    {% if reply.court.name == court.name %}
-                      <p class="article-content">reply sno:{{ reply.parent.sno }}</p>
-                      <p class="article-content">comment sno :{{ comment.sno }}</p>
-                      {% comment %} <p class="article-content">entered</p> {% endcomment %}
-                      {% if reply.parent.sno == comment.sno %}
-                        <p class="article-content">entered</p>
-                          <img
-                            class="rounded-circle article-img"
-                            src="{{ reply.user.profile.image.url }}"
-                          />
-                          <div class="media-body">
-                            <div class="article-metadata">
-                              <a class="mr-2" href="#">{{ reply.user.username }}</a>
-                              <small class="text-muted"
-                                >{{ reply.timestamp | date:'F d, Y' }}</small
-                              >
-                            </div>
-                            <p class="article-content">{{ reply.comment }}</p>
+                    <div class="row">
+                      <div class="col-md-2">
+                        <img
+                          class="rounded-circle article-img"
+                          src="{{ reply.user.profile.image.url }}"
+                        />
+                      </div>
+                      <div class="col-md-10">
+                        <div class="media-body">
+                          <div class="article-metadata leftshift">
+                            <a class="mr-2" href="#">{{ reply.user.username }}</a>
+                            <small class="text-muted"
+                              >{{ reply.timestamp | date:'F d, Y' }}</small
+                            >
                           </div>
-                      {% endif %} 
-                    {% endif %} 
-                  {% endfor %}
+                          <p class="article-content leftshift">{{ reply.comment }}</p>
+                        </div>
+                      </div>
+                    </div>
+                    {% endif %} {% endif %} {% endfor %}
+                  </div>
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
-          </article>
-        {% endif %}
-        {% endif %} {% endfor %}
+            </article>
+            {% endif %} {% endif %} {% endfor %}
+          </div>
+        </div>
       </div>
     </div>
   </div>

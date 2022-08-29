@@ -16,21 +16,8 @@
             >Add New Slot</a
     >
 {% endif %}
-
-    <div class="dropdown show mb-3">
-      <a class="btn btn-outline  btn-lg mt-1 mb-3 dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        Filter By Sports
-      </a>
-
-      <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-          {% for sport in sports %}
-              <a class="dropdown-item" href="{% url 'sport-slots' sport.name %}">{{ sport.name }}</a>
-          {% endfor %}
-      </div>
-    </div>
-
-{% for slot in slots %}
-    {% if slot not in booked_slots.slots.all %}
+<h2 class=" green-col article-title sport-title centre-text mb-3">Booked Slots</h2>
+{% for slot in booked_slots.slots.all %}
     <article class="media content-section shadow-box">
         <div class="media-body">
             <div class="article-metadata sport-title-div">
@@ -44,6 +31,7 @@
                         <td class='centre-text px-4'>
                             <a class="small-text small-a" href="{% url 'courts-detail' slot.court.id %}">{{ slot.court.name }}</a>
                         </td>
+                    
                     </tr>
                     <tr>
                         <th scope="row" class='centre-text'><h5 class="centre-text side-header mb-2">Sport</h5></th>
@@ -74,15 +62,8 @@
                     </tbody>
                 </table>
             </div>
-            <div class="px-4">
-                <form action="{%url 'add_slot' slot.id %}" method="POST">
-                    {% csrf_token %}
-                    <button type="submit" class="btn btn-outline btn-block btn-lg mt-1 mb-3 trending-btn">Book Now</button>
-                </form>
-            </div>
         </div>
     </article>
-    {% endif %}
 {% endfor %}
 
 {% endblock content %}

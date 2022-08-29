@@ -49,9 +49,6 @@ def sports(request):
     }
     return render(request, 'sports/sports.html', context)
 
-
-
-
 class SlotListView(ListView):
     model = Slot
     template_name = 'sports/slots.html'

@@ -69,6 +69,7 @@ urlpatterns = [
     path('courts/new/', CourtCreateView.as_view(), name='courts-create'),
     path('courts/<int:pk>/update', CourtUpdateView.as_view(), name='courts-update'),
     path('courts/<int:pk>/delete', CourtDeleteView.as_view(), name='courts-delete'),
+    path('courts/<int:pk>/comment',courts_view.postComment, name='courts-comment'),
     path('slots/<int:pk>/add', add_slot, name='add_slot'),
     path('slots/<int:pk>/remove', remove_slot, name='remove_slot'),
     path('', sports_view.home, name='main-home'),

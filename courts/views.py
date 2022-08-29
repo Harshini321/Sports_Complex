@@ -1,12 +1,13 @@
-from django.shortcuts import render
-from .models import Court
+from django.shortcuts import render,redirect
+from .models import Court,UserComment
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from users.models import Staff
 from sports.models import Slot
 from users.models import Rating
-
-
+from django.contrib import messages
+from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 def courts(request):
     context = {
@@ -25,7 +26,7 @@ class CourtListView(ListView):
 class CourtDetailView(DetailView):
     model = Court
     context_object_name = 'court'
-    extra_context = {'staffs': Staff.objects.all(), 'slots': Slot.objects.all(), 'ratings': Rating.objects.all()}
+    extra_context = {'staffs': Staff.objects.all(), 'slots': Slot.objects.all(), 'ratings': Rating.objects.all(),'comments':UserComment.objects.all()}
 
 
 class CourtCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
@@ -59,3 +60,14 @@ class CourtDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         if self.request.user.email.startswith('staff') or self.request.user.is_superuser:
             return True
         return False
+
+@login_required
+def postComment(request,pk):
+    if request.method=='POST':
+        comment=request.POST.get('comment')
+        user=User.objects.get(username=request.user)
+        court=Court.objects.get(id=pk)
+        comment=UserComment(comment=comment,user=user,court=court)
+        comment.save()
+        messages.success(request,"Your comment has been posted successfully!")
+    return redirect(f'/courts/{court.pk}')

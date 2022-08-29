@@ -67,7 +67,14 @@ def postComment(request,pk):
         comment=request.POST.get('comment')
         user=User.objects.get(username=request.user)
         court=Court.objects.get(id=pk)
-        comment=UserComment(comment=comment,user=user,court=court)
-        comment.save()
-        messages.success(request,"Your comment has been posted successfully!")
+        parentsno=request.POST.get('parentsno')
+        if parentsno == '':
+            comment=UserComment(comment=comment,user=user,court=court)
+            comment.save()
+            messages.success(request,"Your comment has been posted successfully!")
+        else:
+            parent=UserComment.objects.get(sno=parentsno)
+            comment=UserComment(comment=comment,user=user,court=court,parent=parent)
+            comment.save()
+            messages.success(request,"Your reply has been posted successfully!")
     return redirect(f'/courts/{court.pk}')

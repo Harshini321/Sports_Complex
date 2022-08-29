@@ -71,62 +71,115 @@
       </div>
     </div>
     {% endif %}
-    <div >
-      {% comment %} <h1>Comments</h1>
-      <form action="{%url 'courts-comment' court.id %}" method="POST">
-        {% csrf_token %}
-        <input type='text' name='comment' placeholder='Comment here'>
-        <input type='hidden' name='CourtSno' value='{{ court.id }}'>
-        <input type='submit' value='Submit'>
-        <button type="submit" class="btn btn-outline btn-block btn-lg mt-1 mb-3">Book Now</button>
-      </form> {% endcomment %}
-    <div class="border rounded mt-4 py-3 px-3">
-      <form action="{%url 'courts-comment' court.id %}" method="POST">
-        <div class="form-group">
+    <div>
+      <div class="border rounded mt-4 py-3 px-3">
+        <form action="{%url 'courts-comment' court.id %}" method="POST">
           {% csrf_token %}
-          <label for="exampleFormControlInput1">Comment</label>
-          <input type="text" class="form-control" id="exampleFormControlInput1" name='comment' placeholder="Add Comment..">
-        </div>
-        <input type='hidden' name='CourtSno' value='{{ court.id }}'>
-        <button type="submit" class="btn btn-outline trending-btn">Post Comment</button>
-      </form>
-    </div>
-    <div class="border rounded mt-4 py-3 px-3">
-        {% for comment in comments %}
-          {% if comment.court.name == court.name %}
-            <article class="media content-section">
-              <img
-                class="rounded-circle article-img"
-                src="{{ comment.user.profile.image.url }}"
-              />
-              <div class="media-body">
-                <div class="article-metadata">
-                  <a class="mr-2" href="#"
-                    >{{ comment.user.username }}</a
-                  >
-                  <small class="text-muted">{{ comment.timestamp | date:'F d, Y' }}</small>
+          <div class="form-group">
+            <label for="exampleFormControlInput1">Comment</label>
+            <input
+              type="text"
+              class="form-control"
+              id="exampleFormControlInput1"
+              name="comment"
+              placeholder="Add Comment.."
+            />
+          </div>
+          <input type="hidden" name="CourtSno" value="{{ court.id }}" />
+          <input type="hidden" name="parentsno" value="" />
+          <button type="submit" class="btn btn-outline trending-btn">
+            Post Comment
+          </button>
+        </form>
+      </div>
+      <div class="border rounded mt-4 py-3 px-3">
+        {% for comment in comments %} {% if comment.court.name == court.name %}
+        {% if not comment.parent %}
+          <article class="media content-section">
+            <img
+              class="rounded-circle article-img"
+              src="{{ comment.user.profile.image.url }}"
+            />
+            <div class="media-body">
+              <div class="article-metadata">
+                <a class="mr-2" href="#">{{ comment.user.username }}</a>
+                <small class="text-muted"
+                  >{{ comment.timestamp | date:'F d, Y' }}</small
+                >
+              </div>
+              <p class="article-content">{{ comment.comment }}</p>
+              <p>
+                <a
+                  class="btn btn-outline trending-btn"
+                  data-toggle="collapse"
+                  href="#repylBox{{comment.sno}}"
+                  role="button"
+                  aria-expanded="false"
+                  aria-controls="repylBox{{comment.sno}}"
+                >
+                  Reply
+                </a>
+              </p>
+              <div class="collapse" id="repylBox{{comment.sno}}">
+                <div class="card card-body">
+                  <form action="{%url 'courts-comment' court.id %}" method="POST">
+                    {% csrf_token %}
+                    <div class="form-group">
+                      <label for="comment">Reply</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="exampleFormControlInput1"
+                        name="comment"
+                        placeholder="Add Comment.."
+                      />
+                      <input
+                        type="hidden"
+                        name="parentsno"
+                        value="{{ comment.sno }}"
+                      />
+                    </div>
+                    <input type="hidden" name="CourtSno" value="{{ court.id }}" />
+                    <button type="submit" class="btn btn-outline trending-btn">
+                      Post Reply
+                    </button>
+                  </form>
+                  
                 </div>
-                <p class="article-content">{{ comment.comment }}</p>
-                <p>
-                  <a class="btn btn-outline trending-btn" data-toggle="collapse" href="#repylBox{{comment.sno}}" role="button" aria-expanded="false" aria-controls="repylBox{{comment.sno}}">
-                    Reply
-                  </a>
-                </p>
-                <div class="collapse" id="repylBox{{comment.sno}}">
-                  <div class="card card-body">
-                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
-                  </div>
+                <div class="border rounded mt-4 py-3 px-3">
+                  <p class="article-content">Replies</p>
+                  {% for reply in comments %} 
+                    {% comment %} <p class="article-content">entered</p> {% endcomment %}
+                    {% if reply.court.name == court.name %}
+                      <p class="article-content">reply sno:{{ reply.parent.sno }}</p>
+                      <p class="article-content">comment sno :{{ comment.sno }}</p>
+                      {% comment %} <p class="article-content">entered</p> {% endcomment %}
+                      {% if reply.parent.sno == comment.sno %}
+                        <p class="article-content">entered</p>
+                          <img
+                            class="rounded-circle article-img"
+                            src="{{ reply.user.profile.image.url }}"
+                          />
+                          <div class="media-body">
+                            <div class="article-metadata">
+                              <a class="mr-2" href="#">{{ reply.user.username }}</a>
+                              <small class="text-muted"
+                                >{{ reply.timestamp | date:'F d, Y' }}</small
+                              >
+                            </div>
+                            <p class="article-content">{{ reply.comment }}</p>
+                          </div>
+                      {% endif %} 
+                    {% endif %} 
+                  {% endfor %}
                 </div>
               </div>
-        
-            </article>
-          {% endif %}
-        {% endfor %}
-      
+            </div>
+          </article>
+        {% endif %}
+        {% endif %} {% endfor %}
+      </div>
     </div>
   </div>
-</div>
-  
-  
 </article>
 {% endblock content %}

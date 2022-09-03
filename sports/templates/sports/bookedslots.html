@@ -1,21 +1,7 @@
 {% extends 'sports/base.html' %}
 {% block content %}
-{% for staff in staffs %}
-    {% if user == staff.user %}
-        <a
-            class="btn btn-outline btn-block btn-lg mt-1 mb-3"
-            href="{% url 'slots-create' %}"
-            >Add New Slot</a
-        >
-    {% endif %}
-{% endfor %}
-{% if user.is_superuser %}
-    <a
-            class="btn btn-outline btn-block btn-lg mt-1 mb-3 "
-            href="{% url 'slots-create' %}"
-            >Add New Slot</a
-    >
-{% endif %}
+
+
 <h2 class=" green-col article-title sport-title centre-text mb-3">Booked Slots</h2>
 {% for slot in booked_slots.slots.all %}
     {% if slot.date == today %}

@@ -18,6 +18,7 @@
         >
     {% endif %}
 {% for slot in slots %}
+    {% if slot.date == today %}
     <article class="media content-section">
         <div class="media-body">
             <div class="article-metadata">
@@ -70,6 +71,7 @@
             </div>
         </div>
     </article>
+    {% endif %}
 {% endfor %}
 
 {% endblock content %}

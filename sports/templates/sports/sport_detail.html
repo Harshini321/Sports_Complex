@@ -14,7 +14,7 @@
             </div>
             <div class="row">
                 <div class="col-md-6">
-                    <div class=' border rounded ml-3 py-3'>
+                    <div class=' border rounded ml-3 py-3 mb-3'>
                         <h5 class="centre-text side-header mb-2">Available Courts</h5>
                         {% for court in sport.courts.all %}
                             <p class='centre-text'><a class="small-text small-a" href="{% url 'courts-detail' court.id %}">{{ court.name }}</a></p>
@@ -22,7 +22,7 @@
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <div class=' border rounded mr-3 py-3'>
+                    <div class=' border rounded mr-3 py-3 mb-3'>
                         <h5 class="centre-text side-header mb-2">Available slots</h5>
                         {% for slot in slots %}
                             {% if slot.sport == sport and slot.date == today %}

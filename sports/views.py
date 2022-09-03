@@ -43,7 +43,7 @@ def remove_slot(request, pk):
 
 
 def home(request):
-    all_slots = Slot.objects.all()
+    all_slots = Booked_Slot.objects.first().slots.all()
     all_sports = Sport.objects.all()
     dict = {}
     dict_court = {}
@@ -99,19 +99,23 @@ class SlotListView(ListView):
     ordering = ['-date']
 
 
-class BookedSlotListView(ListView):
+class BookedSlotListView(LoginRequiredMixin, UserPassesTestMixin,ListView):
     model = Booked_Slot
     template_name = 'sports/bookedslots.html'
     context_object_name = 'slots_unused'
     extra_context = {'staffs': Staff.objects.all(), 'sports': Sport.objects.all(),
                      'booked_slots': Booked_Slot.objects.first(), 'today': datetime.date.today()}
+    def test_func(self):
+        if self.request.user.email.startswith('staff') or self.request.user.is_superuser:
+            return True
+        return False
 
 
 class SportSlotListView(ListView):
     model = Slot
     template_name = 'sports/sport_slots.html'
     context_object_name = 'slots'
-    extra_context = {'staffs': Staff.objects.all()}
+    extra_context = {'staffs': Staff.objects.all(), 'today': datetime.date.today()}
 
     def get_queryset(self):
         sport = get_object_or_404(Sport, name=self.kwargs.get('name'))

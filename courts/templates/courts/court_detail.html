@@ -4,14 +4,15 @@
     <div class="article-metadata">
       <h2 class="article-title sport-detail-title">{{court.name}}</h2>
     </div>
+
     <p class="article-content centre-text small-text mt-3">
       Court Capacity : {{ court.capacity }}
     </p>
     <div class="row">
-      <div class="col-md-6">
-        <div class="border rounded ml-3 py-3">
+      <div class="col-md">
+        <div class="border rounded py-3">
           <h5 class="centre-text side-header mb-2">Available slots</h5>
-          {% for slot in slots %} {% if slot.court == court %}
+          {% for slot in slots %} {% if slot.court == court and slot.date == today %}
           <p class="centre-text">
             <a
               class="small-text small-a"
@@ -22,55 +23,15 @@
           {% endif %} {% endfor %}
         </div>
       </div>
-      <div class="col-md-6">
-        <div class="border rounded mr-3 py-3">
-          <h5 class="centre-text side-header mb-2">Rating</h5>
-          {% for rating in ratings %} {% if rating.court == court %}
-          <p class="article-content centre-text small-text mt-3">
-            {{ rating.rating }}
-          </p>
-          {% endif %} {% endfor %}
-          <div class="m-3">
-            <a class="btn btn-outline btn-block btn-sm" href="#">Add Rating</a>
-          </div>
-        </div>
-      </div>
     </div>
-    {% for staff in staffs %} {% if user == staff.user %}
-    <div class="row">
-      <div class="col-md-6">
+    <div class="centre-text">
         <a
-          class="btn btn-outline btn-block btn-sm mt-3 mb-1"
-          href="{% url 'courts-update' court.id %}"
-          >Update</a
+            class="btn btn-outline mt-3 mb-2 mr-2 trending-btn centre-text"
+            href="{% url 'courts-rating' court.id %}"
+            >Rate this Court</a
         >
-      </div>
-      <div class="col-md-6">
-        <a
-          class="btn btn-danger btn-sm btn-block mt-3 mb-1 delete"
-          href="{% url 'courts-delete' court.id %}"
-          >Delete</a
-        >
-      </div>
     </div>
-    {% endif %} {% endfor %} {% if user.is_superuser %}
-    <div class="row">
-      <div class="col-md-6">
-        <a
-          class="btn btn-outline btn-block btn-sm mt-3 mb-1"
-          href="{% url 'courts-update' court.id %}"
-          >Update</a
-        >
-      </div>
-      <div class="col-md-6">
-        <a
-          class="btn btn-danger btn-sm btn-block mt-3 mb-1 delete"
-          href="{% url 'courts-delete' court.id %}"
-          >Delete</a
-        >
-      </div>
-    </div>
-    {% endif %}
+
     <div>
       <div class="border rounded mt-4 py-3 px-3">
         <form action="{%url 'courts-comment' court.id %}" method="POST">
@@ -207,6 +168,41 @@
           </div>
         </div>
       </div>
+    {% for staff in staffs %} {% if user == staff.user %}
+    <div class="row">
+      <div class="col-md-6">
+        <a
+          class="btn btn-outline btn-block btn-sm mt-3 mb-1"
+          href="{% url 'courts-update' court.id %}"
+          >Update</a
+        >
+      </div>
+      <div class="col-md-6">
+        <a
+          class="btn btn-danger btn-sm btn-block mt-3 mb-1 delete"
+          href="{% url 'courts-delete' court.id %}"
+          >Delete</a
+        >
+      </div>
+    </div>
+    {% endif %} {% endfor %} {% if user.is_superuser %}
+    <div class="row">
+      <div class="col-md-6">
+        <a
+          class="btn btn-outline btn-block btn-sm mt-3 mb-1"
+          href="{% url 'courts-update' court.id %}"
+          >Update</a
+        >
+      </div>
+      <div class="col-md-6">
+        <a
+          class="btn btn-danger btn-sm btn-block mt-3 mb-1 delete"
+          href="{% url 'courts-delete' court.id %}"
+          >Delete</a
+        >
+      </div>
+    </div>
+    {% endif %}
     </div>
   </div>
 </article>

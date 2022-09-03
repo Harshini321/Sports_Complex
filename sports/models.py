@@ -5,6 +5,7 @@ from django.utils import timezone
 from django.urls import reverse
 from django.contrib.auth.models import User
 
+
 # Create your models here.
 class Sport(models.Model):
     name = models.CharField(max_length=100)
@@ -18,8 +19,8 @@ class Sport(models.Model):
 
 
 class Slot(models.Model):
-    sport = models.ForeignKey(Sport,on_delete=models.CASCADE,default='')
-    court = models.ForeignKey(Court,on_delete=models.CASCADE,default='')
+    sport = models.ForeignKey(Sport, on_delete=models.CASCADE, default='')
+    court = models.ForeignKey(Court, on_delete=models.CASCADE, default='')
     date = models.DateField()
     start_time = models.TimeField()
     end_time = models.TimeField()
@@ -32,14 +33,16 @@ class Slot(models.Model):
 
 
 class Booked_Slot(models.Model):
-    slots=models.ManyToManyField(Slot,blank=True)
+    slots = models.ManyToManyField(Slot, blank=True)
+
     def __str__(self):
         return f'Booked Slots'
 
 
 class FeaturedMatch(models.Model):
-    title=models.CharField(max_length=50)
-    description=models.TextField()
+    title = models.CharField(max_length=50)
+    description = models.TextField()
+
     def __str__(self):
         return self.title
 

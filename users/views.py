@@ -1,9 +1,13 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from .forms import UserRegistrationForm, UserUpdateForm, ProfileUpdateForm
+from .forms import UserRegistrationForm, UserUpdateForm, ProfileUpdateForm, RateForm
 from django.contrib.auth.decorators import login_required
-from .models import Member
+from .models import Member, Rating
 import datetime
+from courts.models import Court
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.template import loader
 
 
 # Create your views here.
@@ -40,3 +44,50 @@ def profile(request):
         'date': datetime.date.today()
     }
     return render(request, 'users/profile.html', context)
+
+
+def rating(request, pk):
+    court = Court.objects.get(id=pk)
+    member = request.user
+    if request.method == 'POST':
+        form = RateForm(request.POST)
+        if form.is_valid():
+            rate = form.save(commit=False)
+            rate.member = member
+            rate.court = court
+            rate.save()
+            return redirect('courts-detail', pk=pk)
+    else:
+        form = RateForm()
+
+    court_rating = Rating.objects.filter(court=court)
+    existing_rating = Rating.objects.filter(court=court, member=member)
+    final_rating = 0
+    for rtg in court_rating:
+        final_rating += rtg.rating
+    if len(court_rating) != 0:
+        final_rating = final_rating / len(court_rating)
+    else:
+        final_rating = 'Be the first one to Rate!'
+    context = {
+        'form': form,
+        'court': court,
+        'final_rating': final_rating,
+        'existing_rating': existing_rating,
+        'court_ratings': court_rating
+    }
+    return render(request, 'users/rating.html', context)
+
+
+# class RatingUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+#     model = Rating
+#     fields = ['rating']
+#
+#     def form_valid(self, form):
+#         form.instance.member = self.request.user
+#         return super().form_valid(form)
+#
+#     def test_func(self):
+#         if self.request.user.email.startswith('staff') or self.request.user.is_superuser :
+#             return True
+#         return False

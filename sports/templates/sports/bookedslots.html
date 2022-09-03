@@ -18,6 +18,7 @@
 {% endif %}
 <h2 class=" green-col article-title sport-title centre-text mb-3">Booked Slots</h2>
 {% for slot in booked_slots.slots.all %}
+    {% if slot.date == today %}
     <article class="media content-section shadow-box">
         <div class="media-body">
             <div class="article-metadata sport-title-div">
@@ -64,6 +65,6 @@
             </div>
         </div>
     </article>
+    {% endif %}
 {% endfor %}
-
 {% endblock content %}

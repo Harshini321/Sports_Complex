@@ -30,7 +30,7 @@
     </div>
 
 {% for slot in slots %}
-    {% if slot not in booked_slots.slots.all %}
+    {% if slot not in booked_slots.slots.all and slot.date == today %}
     <article class="media content-section shadow-box">
         <div class="media-body">
             <div class="article-metadata sport-title-div">

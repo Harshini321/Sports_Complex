@@ -38,9 +38,10 @@
               <div class="pl-4 random ">
                 <div class="shadow-lg card featured-card mb-4">
                   <div class="card-body">
-                    <h5 class="card-title py-2 trending-head2">Special title treatment</h5>
+
+                      <h5 class="card-title py-2 trending-head2 orange-col">Trending Sport : {{ trending_sport }}</h5>
                     <p class="card-text card-para py-3 px-3">With supporting text below as a natural lead-in to additional content.text below as a natural lead-in to additional content.text below as a natural lead-in to additional content.</p>
-                    <a href="#" class="btn btn-outline btn-lg ">Go somewhere</a>
+                    <a href="{% url 'sports-detail' trending_sport.id %}" class="btn btn-outline btn-lg ">Explore Now!</a>
                   </div>
                 </div>
               </div>
@@ -49,9 +50,9 @@
           <div class="pr-4 random ">
             <div class="shadow-lg card featured-card mb-4">
               <div class="card-body">
-                <h5 class="card-title py-2 trending-head2">Special title treatment</h5>
+                <h5 class="card-title py-2 trending-head2">Most Rated Court : {{ rated_court }}</h5>
                 <p class="card-text card-para py-3 px-3">With supporting text below as a natural lead-in to additional content.text below as a natural lead-in to additional content.text below as a natural lead-in to additional content.</p>
-                <a href="#" class="btn btn-outline btn-lg">Go somewhere</a>
+                <a href="{% url 'courts-detail' rated_court.id %}" class="btn btn-outline btn-lg">Explore Now!</a>
               </div>
             </div>
           </div>

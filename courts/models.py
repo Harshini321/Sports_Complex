@@ -18,7 +18,7 @@ class Court(models.Model):
 
 class UserComment(models.Model):
     sno=models.AutoField(primary_key=True)
-    comment=models.TextField()
+    comment=models.TextField(blank=False)
     user=models.ForeignKey(User,on_delete=models.CASCADE)
     court=models.ForeignKey(Court,on_delete=models.CASCADE)
     parent=models.ForeignKey('self',on_delete=models.CASCADE,null=True)

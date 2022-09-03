@@ -1,5 +1,5 @@
-from django.shortcuts import render,redirect
-from .models import Court,UserComment
+from django.shortcuts import render, redirect
+from .models import Court, UserComment
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from users.models import Staff
@@ -8,6 +8,8 @@ from users.models import Rating
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
+import datetime
+
 # Create your views here.
 def courts(request):
     context = {
@@ -26,7 +28,17 @@ class CourtListView(ListView):
 class CourtDetailView(DetailView):
     model = Court
     context_object_name = 'court'
-    extra_context = {'staffs': Staff.objects.all(), 'slots': Slot.objects.all(), 'ratings': Rating.objects.all(),'comments':UserComment.objects.all()}
+    extra_context = {'staffs': Staff.objects.all(), 'slots': Slot.objects.all(), 'ratings': Rating.objects.all(),
+                     'comments': UserComment.objects.all(), 'today': datetime.date.today()}
+
+    # def get_context_data(self, **kwargs):
+    #     context = super().get_context_data(**kwargs)
+    #     rating = Rating.objects.filter(court=self.object)
+    #     rating_f = 0
+    #     for rtg in rating:
+    #         rating_f += rtg.rating
+    #     rating_f = rating_f / len(rating)
+    #     context['rating_f'] = rating_f
 
 
 class CourtCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
@@ -61,20 +73,21 @@ class CourtDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
             return True
         return False
 
+
 @login_required
-def postComment(request,pk):
-    if request.method=='POST':
-        comment=request.POST.get('comment')
-        user=User.objects.get(username=request.user)
-        court=Court.objects.get(id=pk)
-        parentsno=request.POST.get('parentsno')
+def postComment(request, pk):
+    if request.method == 'POST':
+        comment = request.POST.get('comment')
+        user = User.objects.get(username=request.user)
+        court = Court.objects.get(id=pk)
+        parentsno = request.POST.get('parentsno')
         if parentsno == '':
-            comment=UserComment(comment=comment,user=user,court=court)
+            comment = UserComment(comment=comment, user=user, court=court)
             comment.save()
-            messages.success(request,"Your comment has been posted successfully!")
+            messages.success(request, "Your comment has been posted successfully!")
         else:
-            parent=UserComment.objects.get(sno=parentsno)
-            comment=UserComment(comment=comment,user=user,court=court,parent=parent)
+            parent = UserComment.objects.get(sno=parentsno)
+            comment = UserComment(comment=comment, user=user, court=court, parent=parent)
             comment.save()
-            messages.success(request,"Your reply has been posted successfully!")
+            messages.success(request, "Your reply has been posted successfully!")
     return redirect(f'/courts/{court.pk}')

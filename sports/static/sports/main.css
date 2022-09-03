@@ -432,3 +432,9 @@ body {
 .leftshift{
   text-align: left !important;
 }
+.main-col{
+    color: #041e3c !important;
+}
+.orange-col{
+    color: #f25d50 !important;
+}

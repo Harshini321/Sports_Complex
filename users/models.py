@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from sports.models import Slot
 from courts.models import Court
+from django.contrib.auth.models import User
 from django.core.validators import MaxValueValidator, MinValueValidator
 
 
@@ -38,12 +39,19 @@ class Member(models.Model):
         return self.user.username
 
 
+RATE_CHOICES = [
+    (1, '1 : Poor'),
+    (2, '2 : Unsatisfactory'),
+    (3, '3 : Satisfactory'),
+    (4, '4 : Very Satisfactory'),
+    (5, '5 : Outstanding')
+]
+
+
 class Rating(models.Model):
-    member = models.ForeignKey(Member, on_delete=models.CASCADE)
+    member = models.ForeignKey(User, on_delete=models.CASCADE)
     court = models.ForeignKey(Court, on_delete=models.CASCADE)
-    rating = models.IntegerField(
-        validators=[MaxValueValidator(5), MinValueValidator(1)]
-    )
+    rating = models.PositiveSmallIntegerField(choices=RATE_CHOICES)
 
     def __str__(self):
-        return f'Rating by {self.member.user.username} to {self.court.name}'
+        return f'Rating by {self.member.username} to {self.court.name}'

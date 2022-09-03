@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from sports.models import Slot
 from courts.models import Court
-from django.contrib.auth.models import User
+from django.urls import reverse
 from django.core.validators import MaxValueValidator, MinValueValidator
 
 
@@ -55,3 +55,6 @@ class Rating(models.Model):
 
     def __str__(self):
         return f'Rating by {self.member.username} to {self.court.name}'
+
+    def get_absolute_url(self):
+        return reverse('courts-rating', kwargs={'pk': self.pk})

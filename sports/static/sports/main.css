@@ -14,11 +14,11 @@ body {
   }
 
   .site-header .navbar-nav .nav-link {
-    color: #ffffff;
+    color:#041e3c;
   }
 
   .site-header .navbar-nav .nav-link:hover {
-    color: #F8ECD1;
+    color:#009DAE;
   }
 
   .site-header .navbar-nav .nav-link.active {
@@ -123,13 +123,15 @@ body {
 
 /*nav-bar*/
 .bg-steel {
-  background-color: #041e3c;
+  background-color: #eeeeee;
 }
 .nav-head{
   font-size: 24px;
+    color: #041e3c !important;
+    font-weight: bold;
 }
 .nav-href {
-  font-size: 18px;
+  font-size: 20px;
 }
 .site-header1{
   margin-bottom: 2%;
@@ -148,8 +150,9 @@ body {
 }
 
 .home-title{
-    font-size:50px;
-    font-weight: bold;
+    font-size:60px;
+    /*font-weight: bold;*/
+    /*fon*/
     /*margin-top: 100px;*/
 }
 .home-text{
@@ -340,7 +343,7 @@ body {
 .con{
     padding: 5px 0 25px;
     bottom: 0 !important;
-    background-color: #041e3c !important;
+    background-color: #eeeeee !important;
 }
 .icons img{
     width: 40px;
@@ -352,15 +355,15 @@ body {
 
 .contact-text{
     font-size: 20px;
-    color: white;
+    color: #041e3c;
 }
 #contact{
     margin-top: 5% !important;
     padding-top: 2%;
     text-align: center;
     /*background-image: linear-gradient( #0468d7, #041e3c);*/
-    background-color: #041e3c;
-    color: white;
+    background-color: #eeeeee;
+    color: #041e3c;
     margin: 0 auto 0;
 }
 

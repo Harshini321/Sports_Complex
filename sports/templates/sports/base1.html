@@ -28,7 +28,7 @@
                     <a class="nav-item nav-link nav-href px-3" href="{% url 'sports-home' %}">Sports</a>
                     <a class="nav-item nav-link nav-href px-3" href="{% url 'courts-home' %}">Courts</a>
                     <a class="nav-item nav-link nav-href px-3" href="{% url 'slots-home' %}">Slots</a>
-                  {% if user.is_authenticated or user.email|slice:5 == 'staff' %}
+                  {% if user.is_superuser or user.email|slice:5 == 'staff' %}
                       <a class="nav-item nav-link nav-href px-3" href="{% url 'bookedslots-home' %}">BookedSlots</a>
                   {% endif %}
                   {% if user.is_authenticated %}
@@ -60,7 +60,7 @@
       </main>
     <section id="contact">
         <div class="container con">
-            <p class="contact-text">MADE BY : HARSHINI</p>
+            <p class="contact-text">Designed and Developed by : HARSHINI</p>
             <p class="contact-text">CONTACT US</p>
             <div class="icons">
               <a href="#" class='mx-2'><img src="{% static 'sports/github.png' %}" alt="github"></a>

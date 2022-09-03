@@ -73,6 +73,7 @@ urlpatterns = [
     path('courts/<int:pk>/delete', CourtDeleteView.as_view(), name='courts-delete'),
     path('courts/<int:pk>/comment', courts_view.postComment, name='courts-comment'),
     path('courts/<int:pk>/rate', user_views.rating, name='courts-rating'),
+    path('courts/<int:pk>/rate/update', user_views.update_rating, name='courts-rating-update'),
     path('slots/<int:pk>/add', add_slot, name='add_slot'),
     path('slots/<int:pk>/remove', remove_slot, name='remove_slot'),
     path('password-reset/',

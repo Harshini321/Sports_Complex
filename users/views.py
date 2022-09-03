@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from .forms import UserRegistrationForm, UserUpdateForm, ProfileUpdateForm, RateForm
+from .forms import UserRegistrationForm, UserUpdateForm, ProfileUpdateForm, RateForm,RateUpdateForm
 from django.contrib.auth.decorators import login_required
 from .models import Member, Rating
 import datetime
@@ -46,6 +46,23 @@ def profile(request):
     return render(request, 'users/profile.html', context)
 
 
+def update_rating(request, pk):
+    court = Court.objects.get(id=pk)
+    if request.method == 'POST':
+        form = RateUpdateForm(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            messages.success(request, f'Your Rating has been edited!')
+            return redirect('courts-detail', pk=pk)
+    else:
+        form = RateUpdateForm(instance=request.user)
+    context = {
+        'form': form,
+    }
+    return render(request, 'users/rating.html', context)
+
+
+@login_required
 def rating(request, pk):
     court = Court.objects.get(id=pk)
     member = request.user
@@ -78,7 +95,6 @@ def rating(request, pk):
     }
     return render(request, 'users/rating.html', context)
 
-
 # class RatingUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 #     model = Rating
 #     fields = ['rating']
@@ -88,6 +104,10 @@ def rating(request, pk):
 #         return super().form_valid(form)
 #
 #     def test_func(self):
-#         if self.request.user.email.startswith('staff') or self.request.user.is_superuser :
+#         rtg = self.get_object()
+#         print(rtg)
+#         print(rtg.member)
+#         print(self.request.user)
+#         if self.request.user != rtg.member:
 #             return True
 #         return False

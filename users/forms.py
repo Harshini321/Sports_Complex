@@ -35,3 +35,9 @@ class RateForm(forms.ModelForm):
     class Meta:
         model = Rating
         fields = ('rating',)
+
+
+class RateUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Rating
+        fields = ['rating']

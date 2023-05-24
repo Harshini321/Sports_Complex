@@ -18,7 +18,7 @@
         >
     {% endif %}
 {% for slot in slots %}
-    {% if slot.date == today %}
+    {% comment %} {% if slot.date == today %} {% endcomment %}
     <article class="media content-section">
         <div class="media-body">
             <div class="article-metadata">
@@ -71,7 +71,7 @@
             </div>
         </div>
     </article>
-    {% endif %}
+    {% comment %} {% endif %} {% endcomment %}
 {% endfor %}
 
 {% endblock content %}

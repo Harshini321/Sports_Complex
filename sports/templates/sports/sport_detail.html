@@ -25,7 +25,7 @@
                     <div class=' border rounded mr-3 py-3 mb-3'>
                         <h5 class="centre-text side-header mb-2">Available slots</h5>
                         {% for slot in slots %}
-                            {% if slot.sport == sport and slot.date == today %}
+                            {% if slot.sport == sport %}
                                 <p class='centre-text'><a class="small-text small-a" href="{% url 'slots-detail' slot.id %}">slot : {{ slot.id }}</a></p>
                                 
                             {% endif %}

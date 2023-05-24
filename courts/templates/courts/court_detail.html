@@ -12,7 +12,7 @@
       <div class="col-md">
         <div class="border rounded py-3">
           <h5 class="centre-text side-header mb-2">Available slots</h5>
-          {% for slot in slots %} {% if slot.court == court and slot.date == today %}
+          {% for slot in slots %} {% if slot.court == court %}
           <p class="centre-text">
             <a
               class="small-text small-a"
